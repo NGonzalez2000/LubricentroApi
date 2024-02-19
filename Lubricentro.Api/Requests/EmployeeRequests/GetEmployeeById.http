@@ -2,8 +2,8 @@
 
 POST {{Api_HostAddress}}/employee/getbyid
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZTRkMjFhZC1jMTk3LTQwMzYtOWQ5OC1hZDY1Y2FlMDYxODIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJleHAiOjE3MDMxMjgyNzUsImlzcyI6Ikx1YnJpY2VudHJvIiwiYXVkIjoiTHVicmljZW50cm8ifQ.ktOSDxkHKkZoIRhUm1qp8DVERZu0tP_Rtp6mti-UGes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZTRkMjFhZC1jMTk3LTQwMzYtOWQ5OC1hZDY1Y2FlMDYxODIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJleHAiOjE3MDMxMjkwOTIsImlzcyI6Ikx1YnJpY2VudHJvIiwiYXVkIjoiTHVicmljZW50cm8ifQ.2VSo94TQ2hSqsoNwXYyHjslSoU2sTazHmiNpAq6uFsw
 
 {
-  "id": "df2bcbba-bf0f-46a9-8b57-89235d57520d"
+  "id": "495476f9-7d7c-409a-aff9-2198f5fcebbd"
 }

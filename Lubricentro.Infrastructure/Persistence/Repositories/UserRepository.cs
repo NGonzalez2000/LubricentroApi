@@ -9,6 +9,6 @@ public class UserRepository(LubricentroDbContext dbContext) : Repository<User,Us
 {
     public async Task<User?> GetUserByEmail(string email)
     {
-        return await DbContext.Set<User>().FirstOrDefaultAsync(u => u.Email == email);
+        return await DbContext.Set<User>().Include(u => u.Role).ThenInclude(r => r.Policies).FirstOrDefaultAsync(u => u.UserName == email);
     }
 }

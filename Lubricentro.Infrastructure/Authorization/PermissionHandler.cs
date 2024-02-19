@@ -1,4 +1,4 @@
-﻿using Lubricentro.Domain.PermissionAggregate;
+﻿using Lubricentro.Domain.PolicyAggregate;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Lubricentro.Infrastructure.Authorization;

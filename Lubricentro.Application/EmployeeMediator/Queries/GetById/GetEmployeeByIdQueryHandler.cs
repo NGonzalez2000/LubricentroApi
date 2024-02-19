@@ -21,6 +21,8 @@ public class GetEmployeeByIdQueryHandler(IEmployeeRepository employeeRepository)
             return Errors.Employee.EmployeeNotFound;
         }
 
-        return new EmployeeResult(employee.Id.Value.ToString(), employee.FirstName, employee.LastName, employee.Email);
+        return new EmployeeResult(
+                employee.Id.Value.ToString(), employee.FirstName, employee.LastName, employee.Email,
+                employee.User.Role.Id.Value.ToString(), employee.User.Role.Name);
     }
 }

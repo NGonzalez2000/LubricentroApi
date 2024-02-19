@@ -23,7 +23,6 @@ public class LoginQueryHandler :
     public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
         // Validate if user exists
-        await Task.CompletedTask;
 
         if (await _userRepository.GetUserByEmail(query.Email) is not User user)
         {
@@ -42,7 +41,7 @@ public class LoginQueryHandler :
 
         return new AuthenticationResult(
             user.Id.Value.ToString()!,
-            user.Email,
+            user.UserName,
             token);
     }
 }

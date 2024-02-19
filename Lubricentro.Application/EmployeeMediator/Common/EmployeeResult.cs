@@ -1,7 +1,5 @@
-﻿namespace Lubricentro.Application.EmployeeMediator.Common;
+﻿using Lubricentro.Application.RoleMediator.Common;
 
-public record EmployeeResult(
-    string Id,
-    string FirstName,
-    string LastName,
-    string Email);
+namespace Lubricentro.Application.EmployeeMediator.Common;
+
+public record EmployeeResult(string Id, string FirstName, string LastName, string Email,string RoleId, string RoleName);

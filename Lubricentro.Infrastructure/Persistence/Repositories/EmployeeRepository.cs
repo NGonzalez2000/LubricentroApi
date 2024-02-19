@@ -9,12 +9,11 @@ public class EmployeeRepository(LubricentroDbContext dbContext) : Repository<Emp
 {
     public async Task<Employee?> GetByEmailAsync(string email)
     {
-        return await DbContext.Set<Employee>().FirstOrDefaultAsync(x => x.Email == email);
+        return await DbContext.Employees.FirstOrDefaultAsync(x => x.Email == email);
     }
 
     public async Task<Employee?> GetByIdAsync(EmployeeId id)
     {
-        var employee = await DbContext.Set<Employee>().FirstOrDefaultAsync(x => x.Id == id);
-        return employee;
+        return await DbContext.Employees.Include(e => e.User).ThenInclude(u => u.Role).FirstOrDefaultAsync(x => x.Id == id); 
     }
 }

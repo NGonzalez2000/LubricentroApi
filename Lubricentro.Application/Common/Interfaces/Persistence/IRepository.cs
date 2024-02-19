@@ -9,5 +9,4 @@ public interface IRepository<TEntity,TId>
     void Add(TEntity repository);
     void Update(TEntity repository);
     void Delete(TEntity repository);
-    List<TEntity> GetAll();
 }

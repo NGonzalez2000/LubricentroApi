@@ -1,0 +1,10 @@
+﻿@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/Role/Create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQZXJtaXNzaW9ucyI6IltcIkNoYXRQb2xpY3lcIixcIlNlcnZlclBvbGljeVwiLFwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5XCJdIiwiZXhwIjoxNzA4MDM0MDQ3LCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.SCZ5pqXtzvoXIXLFUdbzMFfwIbyzjMRbpb0iI162mKU
+
+{
+  "name": "PrimerRol",
+  "policies": ["0D1B1EC6-C3A1-4D77-93B3-0DF6F1515991"]
+}

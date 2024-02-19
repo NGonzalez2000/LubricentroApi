@@ -11,8 +11,6 @@ public class ErrorsController : ApiController
     public IActionResult Error()
     {
         Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-       
-
         return Problem();
     }
 }

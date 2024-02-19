@@ -1,0 +1,11 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/Role/Update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQZXJtaXNzaW9ucyI6IltcIkNoYXRQb2xpY3lcIixcIlNlcnZlclBvbGljeVwiLFwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5XCJdIiwiZXhwIjoxNzA4MDM0MDQ3LCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.SCZ5pqXtzvoXIXLFUdbzMFfwIbyzjMRbpb0iI162mKU
+
+{
+  "id": "3c7cc3bf-d7e5-40d9-940b-3be357e17651",
+  "name": "ChatOnly",
+  "policyIds": ["0d1b1ec6-c3a1-4d77-93b3-0df6f1515991"]
+}

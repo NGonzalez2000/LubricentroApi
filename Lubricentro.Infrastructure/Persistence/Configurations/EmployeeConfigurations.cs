@@ -1,5 +1,7 @@
 ﻿using Lubricentro.Domain.EmployeeAggregate;
 using Lubricentro.Domain.EmployeeAggregate.ValueObjects;
+using Lubricentro.Domain.UserAggregate;
+using Lubricentro.Domain.UserAggregate.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

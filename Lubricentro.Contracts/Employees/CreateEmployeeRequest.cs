@@ -3,5 +3,6 @@
 public record CreateEmployeeRequest(
         string FirstName,
         string LastName,
-        string Email
+        string Email,
+        Guid RoleId
     );

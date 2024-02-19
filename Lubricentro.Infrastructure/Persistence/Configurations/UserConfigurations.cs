@@ -1,5 +1,4 @@
-﻿using Lubricentro.Domain.EmployeeAggregate.ValueObjects;
-using Lubricentro.Domain.UserAggregate;
+﻿using Lubricentro.Domain.UserAggregate;
 using Lubricentro.Domain.UserAggregate.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -25,15 +24,10 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
                 id => id.Value,
                 value => UserId.Create(value));
 
-        builder.Property(u => u.Email)
+        builder.Property(u => u.UserName)
             .HasMaxLength(100);
 
         builder.Property(u => u.Password)
             .HasMaxLength(100);
-
-        builder.Property(u => u.EmployeeId)
-            .HasConversion(
-                id => id.Value,
-                value => EmployeeId.Create(value));
     }
 }

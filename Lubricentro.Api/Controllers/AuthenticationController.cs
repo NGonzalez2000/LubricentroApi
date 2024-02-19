@@ -1,5 +1,4 @@
-﻿using Lubricentro.Application.Authentication.Command.Register;
-using Lubricentro.Contracts.Authentication;
+﻿using Lubricentro.Contracts.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Lubricentro.Application.Authentication.Queries.Login;
@@ -12,17 +11,6 @@ namespace Lubricentro.Api.Controllers;
 [AllowAnonymous]
 public class AuthenticationController(ISender _mediator, IMapper _mapper) : ApiController
 {
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterRequest request)
-    {
-        var command = _mapper.Map<RegisterCommand>(request);
-        var authResult = await _mediator.Send(command);
-        return authResult.Match(
-            authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
-            Problem
-        );
-        
-    }
 
     [HttpPost("login")]
     [AllowAnonymous]

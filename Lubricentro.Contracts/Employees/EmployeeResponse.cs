@@ -4,5 +4,7 @@ public record EmployeeResponse(
     string Id,
     string FirstName,
     string LastName,
-    string Email
+    string Email,
+    string RoleId,
+    string RoleName
     );

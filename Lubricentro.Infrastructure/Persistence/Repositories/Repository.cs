@@ -1,8 +1,9 @@
-﻿using Lubricentro.Domain.Common.Models;
+﻿using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Domain.Common.Models;
 
 namespace Lubricentro.Infrastructure.Persistence.Repositories;
 
-public abstract class Repository<TEntity,TId>
+public abstract class Repository<TEntity,TId> : IRepository<TEntity, TId>
     where TEntity : Entity<TId>
     where TId : AggregateRootId<Guid>
 {
@@ -23,9 +24,5 @@ public abstract class Repository<TEntity,TId>
     public void Delete(TEntity entity)
     {
         DbContext.Set<TEntity>().Remove(entity);
-    }
-    public List<TEntity> GetAll()
-    {
-        return [.. DbContext.Set<TEntity>()];
     }
 }

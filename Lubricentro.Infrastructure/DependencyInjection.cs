@@ -13,17 +13,17 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Lubricentro.Infrastructure.Persistence.Repositories;
 using Lubricentro.Infrastructure.Persistence.Interceptors;
-using Lubricentro.Domain.PermissionAggregate;
+using Lubricentro.Domain.PolicyAggregate;
 using Lubricentro.Infrastructure.Authorization;
 
 namespace Lubricentro.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection AddInfrastructureAsync(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddPersistance(configuration);
-        services.AddAuth(configuration);
+        services.AddAuthAsync(configuration);
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.AddSingleton<IPasswordProvider, PasswordProvider>();
 
@@ -38,13 +38,14 @@ public static class DependencyInjection
         services.AddScoped<PublishDomainEventInterceptor>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-        services.AddScoped<IPermissionRepository, PermissionRepository>();
+        services.AddScoped<IPolicyRepository, PolicyRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
         return services;
     }
 
     
 
-    private static IServiceCollection AddAuth(this IServiceCollection services, ConfigurationManager configuration)
+    private static IServiceCollection AddAuthAsync(this IServiceCollection services, ConfigurationManager configuration)
     {
         var jwtSettings = new JwtSettings();
         configuration.Bind(JwtSettings.SectionName, jwtSettings);
@@ -65,16 +66,16 @@ public static class DependencyInjection
             });
 
         using var serviceProvider = services.BuildServiceProvider();
-        var permissionRepository = serviceProvider.GetRequiredService<IPermissionRepository>();
+        var permissionRepository = serviceProvider.GetRequiredService<IPolicyRepository>();
 
-        List<Permission> permissions = permissionRepository.GetAll();
+        List<Policy> permissions = permissionRepository.GetAll();
 
         services.AddAuthorization(options =>
         {
             foreach (var permission in permissions)
             {
-                options.AddPolicy($"{permission}Policy", policy =>
-                    policy.Requirements.Add(new PermissionRequirement(permission.Name)));
+                options.AddPolicy($"{permission.Name}", policy =>
+                    policy.RequireClaim("Policy", permission.Name));
             }
         });
         return services;

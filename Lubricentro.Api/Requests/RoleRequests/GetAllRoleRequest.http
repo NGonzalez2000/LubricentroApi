@@ -1,0 +1,9 @@
+@Api_HostAddress = http://localhost:5198
+
+GET {{Api_HostAddress}}/Role/GetAll
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQb2xpY3kiOlsiQ2hhdFBvbGljeSIsIlNlcnZlclBvbGljeSIsIkVtcGxveWVlTW9kaWZpY2F0aW9uc1BvbGljeSJdLCJleHAiOjE3MDgwNDE3NzUsImlzcyI6Ikx1YnJpY2VudHJvIiwiYXVkIjoiTHVicmljZW50cm8ifQ.HxIxD4YBkZKHWU4g50JiYjJHJmgXg78PHm97200qEFc
+
+
+{
+}

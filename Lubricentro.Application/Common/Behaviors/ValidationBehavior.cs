@@ -1,7 +1,5 @@
 ﻿using ErrorOr;
 using FluentValidation;
-using Lubricentro.Application.Authentication.Command.Register;
-using Lubricentro.Application.Authentication.Common;
 using MediatR;
 
 namespace Lubricentro.Application.Common.Behaviors;

@@ -1,6 +1,8 @@
 ﻿using Lubricentro.Application.Common.Interfaces.Authentication;
 using Lubricentro.Application.Common.Interfaces.Services;
+using Lubricentro.Domain.PolicyAggregate;
 using Lubricentro.Domain.UserAggregate;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,16 +11,11 @@ using System.Text;
 
 namespace Lubricentro.Infrastructure.Authentication;
 
-public class JwtTokenGenerator : IJwtTokenGenerator
+public class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtSettings, IServiceProvider serviceProvider) : IJwtTokenGenerator
 {
-    private readonly IDateTimeProvider _dateTimeProvider;
-    private readonly JwtSettings _jwtSettings;
-
-    public JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtSettings)
-    {
-        _dateTimeProvider = dateTimeProvider;
-        _jwtSettings = jwtSettings.Value;
-    }
+    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
+    private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
     public string GenerateToken(User user)
     {
@@ -27,11 +24,28 @@ public class JwtTokenGenerator : IJwtTokenGenerator
                 Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
             SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
-        {
+        using var scope = serviceProvider.CreateScope();
+        List<string> policies = [];
+
+
+        List<Claim> claims = 
+        [
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.Value.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email)
-        };
+            new Claim(JwtRegisteredClaimNames.Email, user.UserName)
+        ];
+
+
+        
+        foreach (Policy policy in user.Role.Policies)
+        {
+            claims.Add(new("Policy", policy.Name));
+        }
+        
+
+
+        
+
+
 
         var secuiryToken = new JwtSecurityToken(
             issuer: _jwtSettings.Issuer,

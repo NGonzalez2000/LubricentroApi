@@ -5,12 +5,11 @@ public abstract class ValueObject : IEquatable<ValueObject>
     public abstract IEnumerable<object> GetEqualityComponents();
     public override bool Equals(object? obj)
     {
-        if (obj is null || obj.GetType() != typeof(ValueObject))
+        if (obj is ValueObject vo)
         {
-            return false;
+            return GetEqualityComponents().SequenceEqual(vo.GetEqualityComponents());
         }
-        var valueObject = (ValueObject)obj;
-        return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
+        return false;
     }
     public static bool operator ==(ValueObject left, ValueObject right)
     {

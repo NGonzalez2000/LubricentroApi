@@ -11,7 +11,7 @@ builder.Services
     .AddLogging()
     .AddPresentation()
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructureAsync(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 
