@@ -1,12 +1,24 @@
 ﻿using Lubricentro.Application.Common.Interfaces.Hubs;
+using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Domain.ChatMessageAggregate;
+using Lubricentro.Domain.UserAggregate.ValueObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using System.Security.Claims;
 
 namespace Lubricentro.Infrastructure.Hubs;
-
-public class ChatHub : Hub<IChatHub>
+[Authorize(Policy = "ChatPolicy")]
+public class ChatHub(IChatRepository chatRepository) : Hub<IChatHub>
 {
-    public void SendMessage(string user, string message)
+    private readonly IChatRepository _chatRepository = chatRepository;
+    public async void SendMessageAsync(string receptorId, string message)
     {
-        Clients.All.SendMessageAsync($"User: {user}, message: {message}");
+        var senderId = Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
+        await Clients.User(receptorId).ReciveMessageAsync(senderId, message);
+        UserId sender = UserId.Create(new(senderId));
+        UserId receptor = UserId.Create(new(receptorId));
+        ChatMessage chatMessage = ChatMessage.Create(sender, receptor, message);
+        _chatRepository.SaveMessage(chatMessage);
+        
     }
 }

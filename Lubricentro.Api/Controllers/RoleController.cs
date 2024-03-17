@@ -2,6 +2,7 @@
 using Lubricentro.Application.RoleMediator.Command.Delete;
 using Lubricentro.Application.RoleMediator.Command.Update;
 using Lubricentro.Application.RoleMediator.Queries.GetAll;
+using Lubricentro.Application.RoleMediator.Queries.GetAllPolicies;
 using Lubricentro.Contracts.Roles;
 using MapsterMapper;
 using MediatR;
@@ -43,6 +44,13 @@ public class RoleController(IMapper mapper, ISender sender) : ApiController
         var result = await _mediator.Send(new GetAllRolesQuery());
         return result.Match(result => Ok(_mapper.Map<List<RoleResponse>>(result)),
             Problem);
+    }
+
+    [HttpGet("getallpolicies")]
+    public async Task<IActionResult> GetAllPolicies()
+    {
+        var result = await _mediator.Send(new GetAllPoliciesQuery());
+        return result.Match(result => Ok(_mapper.Map<List<PolicyResponse>>(result)), Problem);
     }
 }
 

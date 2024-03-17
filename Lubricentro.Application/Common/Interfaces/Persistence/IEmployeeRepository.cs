@@ -4,6 +4,8 @@ namespace Lubricentro.Application.Common.Interfaces.Persistence;
 
 public interface IEmployeeRepository : IRepository<Employee, EmployeeId>
 {
+    Task<List<Employee>?> GetAll();
     Task<Employee?> GetByEmailAsync(string email);
     Task<Employee?> GetByIdAsync(EmployeeId id);
+
 }

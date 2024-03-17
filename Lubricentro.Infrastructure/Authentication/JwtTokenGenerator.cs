@@ -1,5 +1,7 @@
 ﻿using Lubricentro.Application.Common.Interfaces.Authentication;
+using Lubricentro.Application.Common.Interfaces.Persistence;
 using Lubricentro.Application.Common.Interfaces.Services;
+using Lubricentro.Domain.EmployeeAggregate;
 using Lubricentro.Domain.PolicyAggregate;
 using Lubricentro.Domain.UserAggregate;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,26 +13,39 @@ using System.Text;
 
 namespace Lubricentro.Infrastructure.Authentication;
 
-public class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtSettings, IServiceProvider serviceProvider) : IJwtTokenGenerator
+public  class JwtTokenGenerator(IDateTimeProvider dateTimeProvider,IServiceProvider serviceProvider, IOptions<JwtSettings> jwtSettings) : IJwtTokenGenerator
 {
     private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
-    private readonly IServiceProvider serviceProvider = serviceProvider;
     private readonly JwtSettings _jwtSettings = jwtSettings.Value;
-
-    public string GenerateToken(User user)
+    private readonly IServiceProvider _serviceProvider = serviceProvider;
+    public async Task<string> GenerateToken(User user)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
             SecurityAlgorithms.HmacSha256);
 
-        using var scope = serviceProvider.CreateScope();
         List<string> policies = [];
 
+        using var scope = _serviceProvider.CreateScope();
+        var _employeeRepository = scope.ServiceProvider.GetRequiredService<IEmployeeRepository>();
 
-        List<Claim> claims = 
+        Employee? employee = await _employeeRepository.GetByEmailAsync(user.UserName);
+
+        string name;
+        if(employee is null)
+        {
+            name = "Nicolas Gonzalez";
+        }
+        else
+        {
+            name = $"{employee.FirstName} {employee.LastName}";
+        }
+
+        List<Claim> claims =
         [
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.Value.ToString()),
+            new Claim("UserName", name),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.Value.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.UserName)
         ];
 

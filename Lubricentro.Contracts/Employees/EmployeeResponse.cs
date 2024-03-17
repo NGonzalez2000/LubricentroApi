@@ -1,6 +1,9 @@
-﻿namespace Lubricentro.Contracts.Employees;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Lubricentro.Contracts.Employees;
 
 public record EmployeeResponse(
+    byte[]? Image,
     string Id,
     string FirstName,
     string LastName,

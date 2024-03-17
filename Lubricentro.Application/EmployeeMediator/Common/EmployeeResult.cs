@@ -1,5 +1,5 @@
-﻿using Lubricentro.Application.RoleMediator.Common;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Lubricentro.Application.EmployeeMediator.Common;
 
-public record EmployeeResult(string Id, string FirstName, string LastName, string Email,string RoleId, string RoleName);
+public record EmployeeResult(byte[]? Image, string Id, string FirstName, string LastName, string Email,string RoleId, string RoleName);

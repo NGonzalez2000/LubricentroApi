@@ -12,5 +12,8 @@ public static partial class Errors
         public static Error CreationFail => Error.Failure(
             code: "User.CreationFail",
             description: "Ocurrió algo inesperado mientras se creaba el nuevo Usuario.");
+        public static Error NotFound => Error.NotFound(
+            code: "User.NotFound",
+            description: "No se encontro el usuario solicitado.");
     }
 }

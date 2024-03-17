@@ -1,0 +1,4 @@
+@Api_HostAddress = https://localhost:7279
+
+POST {{Api_HostAddress}}/test/GetImage
+Content-Type: application/json

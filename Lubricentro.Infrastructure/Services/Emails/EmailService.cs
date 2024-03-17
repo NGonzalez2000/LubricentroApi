@@ -1,12 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Lubricentro.Application.Common.Interfaces.Services;
+using MimeKit;
 
-namespace Lubricentro.Infrastructure.Services.Emails
+namespace Lubricentro.Infrastructure.Services.Emails;
+
+public class EmailService(IEmailSender emailSender) : IEmailService
 {
-    internal class EmailService
+    private readonly IEmailSender _emailSender = emailSender;
+    public async Task SendAsync(string from, string to, string subject, TextPart text)
     {
+
+        MimeMessage mimeMessage = new();
+        mimeMessage.From.Add(new MailboxAddress("", from));
+        mimeMessage.To.Add(new MailboxAddress("", to));
+        mimeMessage.Subject = subject;
+        mimeMessage.Body = text;
+        if (from.EndsWith("gmail.com"))
+        {
+            await _emailSender.SendGmailAsync(mimeMessage);
+            return;
+        }
+
+        if(from.EndsWith("hotmail.com") || from.EndsWith("outlook.com"))
+        {
+            await _emailSender.SendOutlookAsync(mimeMessage);
+        }
     }
 }

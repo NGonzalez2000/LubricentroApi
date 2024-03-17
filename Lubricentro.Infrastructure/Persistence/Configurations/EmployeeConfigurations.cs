@@ -1,7 +1,5 @@
 ﻿using Lubricentro.Domain.EmployeeAggregate;
 using Lubricentro.Domain.EmployeeAggregate.ValueObjects;
-using Lubricentro.Domain.UserAggregate;
-using Lubricentro.Domain.UserAggregate.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,6 +22,9 @@ internal class EmployeeConfigurations : IEntityTypeConfiguration<Employee>
             .ValueGeneratedNever()
             .HasConversion(id => id.Value,
                 value => EmployeeId.Create(value));
+
+        builder.Property(e => e.ImageName)
+            .HasDefaultValue("person.png");
 
         builder.Property(e => e.FirstName)
             .HasMaxLength(100);

@@ -1,0 +1,13 @@
+@Api_HostAddress = http://localhost:5198
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQb2xpY3kiOlsiQ2hhdFBvbGljeSIsIlNlcnZlclBvbGljeSIsIkVtcGxveWVlTW9kaWZpY2F0aW9uc1BvbGljeSJdLCJleHAiOjE3MDk4NTYyMjYsImlzcyI6Ikx1YnJpY2VudHJvIiwiYXVkIjoiTHVicmljZW50cm8ifQ.sFVYPFBK05CylqEzJdyNFfv4LLMT4J0JY4jN04_hCqs
+
+POST {{Api_HostAddress}}/email/send
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "from": "nicogonzalez42331880@gmail.com",
+  "to": "nicu_a_gonzalez@hotmail.com",
+  "subject": "Even more tests !!!!",
+  "body": "This mail was sent by the Server!!!!!!!!!!!!!!!!!!!!! :D" 
+}

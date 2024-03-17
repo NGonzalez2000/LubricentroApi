@@ -8,9 +8,14 @@ using Microsoft.AspNetCore.Authorization;
 namespace Lubricentro.Api.Controllers;
 
 [Route("auth")]
-[AllowAnonymous]
 public class AuthenticationController(ISender _mediator, IMapper _mapper) : ApiController
 {
+    [HttpPost("policyVerification")]
+    public IActionResult PolicyVerification(PolicyValidationRequest request)
+    {
+        PolicyValidationResponse response = new(HttpContext.User.HasClaim(c => c.Type == "Policy" && c.Value == request.PolicyName));
+        return Ok(response);
+    }
 
     [HttpPost("login")]
     [AllowAnonymous]

@@ -1,12 +1,12 @@
-﻿@Api_HostAddress = http://localhost:5198
+﻿@Api_HostAddress = https://localhost:7279
 
 POST {{Api_HostAddress}}/employee/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQb2xpY3kiOlsiQ2hhdFBvbGljeSIsIlNlcnZlclBvbGljeSIsIkVtcGxveWVlTW9kaWZpY2F0aW9uc1BvbGljeSJdLCJleHAiOjE3MDgwNDE3NzUsImlzcyI6Ikx1YnJpY2VudHJvIiwiYXVkIjoiTHVicmljZW50cm8ifQ.HxIxD4YBkZKHWU4g50JiYjJHJmgXg78PHm97200qEFc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQb2xpY3kiOlsiQ2hhdFBvbGljeSIsIlNlcnZlclBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJFbXBsb3llZU1vZGlmaWNhdGlvbnNQb2xpY3kiXSwiZXhwIjoxNzEwMzYyMzE1LCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.bA4fz03jYCoDZjnDDNiYPQFY3Fo9NLT7fITCp91Rt_w
 
 {
   "roleid": "9DC66F91-8601-4BFA-8F10-8B72200A44FD",
   "firstName": "Roberto",
   "lastName": "Poncio",
-  "email": "master3@hotmail.com"
+  "email": "nicu_a_gonzalez@hotmail.com"
 } 

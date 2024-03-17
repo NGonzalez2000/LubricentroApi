@@ -29,5 +29,7 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.Password)
             .HasMaxLength(100);
+
+        builder.Property(u => u.Salt);
     }
 }

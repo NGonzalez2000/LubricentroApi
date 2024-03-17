@@ -8,7 +8,7 @@ namespace Lubricentro.Domain.Common.Errors
         {
             public static Error InvalidCredentials => Error.Validation(
                 code: "Auth.InvalidCred",
-                description: "InvalidCredentials.");
+                description: "Usuario o contraseña incorrecta.");
         }
     }
 }

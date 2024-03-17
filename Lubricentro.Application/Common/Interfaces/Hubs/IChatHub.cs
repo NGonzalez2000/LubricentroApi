@@ -2,7 +2,6 @@
 {
     public interface IChatHub
     {
-        Task SendMessageAsync(string message);
-        Task OnConnectedAsync();
+        Task ReciveMessageAsync(string senderId, string message);
     }
 }

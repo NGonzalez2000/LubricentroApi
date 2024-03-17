@@ -1,5 +1,7 @@
 ﻿using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Domain.ChatMessageAggregate;
 using Lubricentro.Domain.Common.Models;
+using Lubricentro.Domain.CompanyAggregate;
 using Lubricentro.Domain.EmployeeAggregate;
 using Lubricentro.Domain.PolicyAggregate;
 using Lubricentro.Domain.RoleAggregate;
@@ -16,6 +18,8 @@ public class LubricentroDbContext(DbContextOptions<LubricentroDbContext> options
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<Policy> Policies { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<ChatMessage> ChatMessages { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder

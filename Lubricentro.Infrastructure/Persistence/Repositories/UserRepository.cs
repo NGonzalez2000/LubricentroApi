@@ -5,10 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lubricentro.Infrastructure.Persistence.Repositories;
 
-public class UserRepository(LubricentroDbContext dbContext) : Repository<User,UserId>(dbContext), IUserRepository
+public class UserRepository(LubricentroDbContext dbContext) : Repository<User, UserId>(dbContext), IUserRepository
 {
     public async Task<User?> GetUserByEmail(string email)
     {
-        return await DbContext.Set<User>().Include(u => u.Role).ThenInclude(r => r.Policies).FirstOrDefaultAsync(u => u.UserName == email);
+        return await DbContext.Users.Include(u => u.Role).ThenInclude(r => r.Policies).FirstOrDefaultAsync(u => u.UserName == email);
+    }
+
+    public async Task<User?> GetUserByIdAsync(UserId Id)
+    {
+        return await DbContext.Users.FirstOrDefaultAsync(u => u.Id == Id);
     }
 }

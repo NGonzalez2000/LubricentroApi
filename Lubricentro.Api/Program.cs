@@ -1,6 +1,7 @@
 using Lubricentro.Api;
 using Lubricentro.Application;
 using Lubricentro.Infrastructure;
+using Lubricentro.Infrastructure.Hubs;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,6 +55,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseExceptionHandler("/error");
 
 
@@ -62,7 +67,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-//app.MapHub<ChatHub>("chat");
+app.MapHub<ChatHub>("chat");
 
 
 app.Run();

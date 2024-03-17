@@ -1,0 +1,13 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/company/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQb2xpY3kiOlsiQ2hhdFBvbGljeSIsIlNlcnZlclBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJFbXBsb3llZU1vZGlmaWNhdGlvbnNQb2xpY3kiXSwiZXhwIjoxNzEwMjEzMzA0LCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.aSLOVGmIK085I-7VzD_EjJHuISqUI94L_0VAhvYRJQ8
+
+
+{
+    "id": "49acb052-b971-4184-92f3-ca0f0cf24de4",
+    "name": "Lubricentro25"
+  }
+
+ 

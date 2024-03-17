@@ -11,6 +11,7 @@ public class EmployeeMapping : IRegister
     {
         config.NewConfig<EmployeeResult, EmployeeResponse>();
 
+
         config.NewConfig<GetEmployeeByIdQuery, GetEmployeeByIdRequest>();
     }
 }

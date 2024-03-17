@@ -1,5 +1,7 @@
-﻿namespace Lubricentro.Contracts.Employees;
+﻿using Microsoft.AspNetCore.Http;
 
-public record UpdateEmployeeRequest(Guid Id, Guid RoleId, string FirstName, string LastName)
+namespace Lubricentro.Contracts.Employees;
+
+public record UpdateEmployeeRequest(byte[]? ImageData, Guid Id, Guid RoleId, string FirstName, string LastName)
 {
 }

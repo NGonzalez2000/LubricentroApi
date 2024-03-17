@@ -6,23 +6,26 @@ namespace Lubricentro.Domain.EmployeeAggregate;
 
 public sealed class Employee : AggregateRoot<EmployeeId, Guid>
 {
-    private Employee(EmployeeId employeeId, User user, string firstName, string lastName, string email)
+    private Employee(EmployeeId employeeId, string imagePath, User user, string firstName, string lastName, string email)
         : base(employeeId)
     {
+        ImageName = imagePath;
         User = user;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
     }
+    public string ImageName { get; private set; }
     public User User { get; set; }
     public string FirstName { get; private set; } = null!;
     public string LastName { get; private set; } = null!;
     public string Email { get; private set; } = null!;
 
-    public static Employee Create(User user, string firstName, string lastName, string email)
+    public static Employee Create(string imageName, User user, string firstName, string lastName, string email)
     {
         var employee = new Employee(
             EmployeeId.CreateUnique(),
+            imageName,
             user,
             firstName,
             lastName,
@@ -30,7 +33,10 @@ public sealed class Employee : AggregateRoot<EmployeeId, Guid>
 
         return employee;
     }
-
+    public void ChangeImageName(string imageName)
+    {
+        ImageName = imageName;
+    }
     public void ChangeFirstName(string firstName)
     {
         FirstName = firstName;

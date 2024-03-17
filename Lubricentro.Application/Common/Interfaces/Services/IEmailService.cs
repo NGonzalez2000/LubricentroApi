@@ -1,6 +1,8 @@
-﻿namespace Lubricentro.Application.Common.Interfaces.Services
+﻿using MimeKit;
+
+namespace Lubricentro.Application.Common.Interfaces.Services;
+
+public interface IEmailService
 {
-    public class IEmailService()
-    {
-    }
+    Task SendAsync(string from, string to, string subject, TextPart text);
 }

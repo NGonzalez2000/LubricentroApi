@@ -1,9 +1,9 @@
-﻿@Api_HostAddress = http://localhost:5198
+﻿@Api_HostAddress = https://localhost:7279
 
 POST {{Api_HostAddress}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "nico1_a_gonzalez@hotmail.com",
-  "password": "legolas27"
-}
+  "email": "nicu_a_gonzalez@hotmail.com",
+  "password": "giuwjj3"
+} 

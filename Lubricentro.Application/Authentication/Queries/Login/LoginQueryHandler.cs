@@ -8,17 +8,11 @@ using Lubricentro.Domain.UserAggregate;
 
 namespace Lubricentro.Application.Authentication.Queries.Login;
 
-public class LoginQueryHandler :
+public class LoginQueryHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator) :
     IRequestHandler<LoginQuery, ErrorOr<AuthenticationResult>>
 {
-    private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    private readonly IUserRepository _userRepository;
-
-    public LoginQueryHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
-    {
-        _userRepository = userRepository;
-        _jwtTokenGenerator = jwtTokenGenerator;
-    }
+    private readonly IJwtTokenGenerator _jwtTokenGenerator = jwtTokenGenerator;
+    private readonly IUserRepository _userRepository = userRepository;
 
     public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
@@ -30,14 +24,14 @@ public class LoginQueryHandler :
         }
 
         // Validate if password is correct
-        if (user.Password != query.Password)
+        if (!user.PasswordCheck(query.Password))
         {
             return Errors.Authentication.InvalidCredentials;
         }
 
 
         // Create JWT token
-        var token = _jwtTokenGenerator.GenerateToken(user);
+        var token = await _jwtTokenGenerator.GenerateToken(user);
 
         return new AuthenticationResult(
             user.Id.Value.ToString()!,

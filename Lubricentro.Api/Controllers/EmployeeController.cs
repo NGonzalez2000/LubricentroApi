@@ -1,6 +1,7 @@
 ﻿using Lubricentro.Application.EmployeeMediator.Command.Create;
 using Lubricentro.Application.EmployeeMediator.Command.Delete;
 using Lubricentro.Application.EmployeeMediator.Command.Update;
+using Lubricentro.Application.EmployeeMediator.Queries.GetAll;
 using Lubricentro.Application.EmployeeMediator.Queries.GetById;
 using Lubricentro.Contracts.Employees;
 using MapsterMapper;
@@ -15,6 +16,15 @@ namespace Lubricentro.Api.Controllers;
 
 public class EmployeeController(IMapper _mapper, ISender _mediator) : ApiController
 {
+    [HttpGet("getall")]
+    public async Task<IActionResult> GetEmployees()
+    {
+        var result = await _mediator.Send(new GetEmployeesQuery());
+        return result.Match(
+            result => Ok(_mapper.Map<List<EmployeeResponse>>(result)),
+            Problem);
+    }
+
     [HttpPost("create")]
     public async Task<IActionResult> Create(CreateEmployeeRequest request)
     {

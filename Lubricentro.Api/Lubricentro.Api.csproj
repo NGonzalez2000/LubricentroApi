@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Lubricentro.Infrastructure\Lubricentro.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

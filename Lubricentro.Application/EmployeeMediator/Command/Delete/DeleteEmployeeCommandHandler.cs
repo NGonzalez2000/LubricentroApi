@@ -27,7 +27,7 @@ public class DeleteEmployeeCommandHandler(IEmployeeRepository employeeRepository
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new EmployeeResult(
+        return new EmployeeResult(null,
                 employee.Id.Value.ToString(), employee.FirstName, employee.LastName, employee.Email,
                 "","");
     }

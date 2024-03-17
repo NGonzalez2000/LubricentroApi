@@ -18,7 +18,7 @@ public class Role : AggregateRoot<RoleId, Guid>
     }
     public void AddPolicy (Policy policy)
     {
-        if (_policies.Contains(policy))
+        if (_policies.Any(p => p.Id == policy.Id))
         {
             return;
         }
