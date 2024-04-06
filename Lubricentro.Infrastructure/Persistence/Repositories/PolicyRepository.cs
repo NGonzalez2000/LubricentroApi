@@ -9,7 +9,7 @@ public class PolicyRepository(LubricentroDbContext dbContext) : Repository<Polic
 {
     public List<Policy> GetAll()
     {
-        return [..DbContext.Policies];
+        return [.. DbContext.Policies];
     }
 
     public async Task<Policy?> GetPolicyById(PolicyId id)

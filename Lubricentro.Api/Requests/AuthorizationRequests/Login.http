@@ -1,9 +1,9 @@
-﻿@Api_HostAddress = https://localhost:7279
+﻿@Api_HostAddress = https://www.lubricentroapi.com
 
 POST {{Api_HostAddress}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "nicu_a_gonzalez@hotmail.com",
-  "password": "giuwjj3"
+  "email": "nico1_a_gonzalez@hotmail.com",
+  "password": "legolas27"
 } 

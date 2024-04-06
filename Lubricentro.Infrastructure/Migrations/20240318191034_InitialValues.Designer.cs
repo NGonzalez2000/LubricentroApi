@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lubricentro.Infrastructure.Migrations
 {
     [DbContext(typeof(LubricentroDbContext))]
-    [Migration("20240215204633_InitialRoles")]
-    partial class InitialRoles
+    [Migration("20240318191034_InitialValues")]
+    partial class InitialValues
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,49 @@ namespace Lubricentro.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Lubricentro.Domain.ChatMessageAggregate.ChatMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("TimeSend");
+
+                    b.Property<string>("MessageText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ReceptorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChatMessages", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Company", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cuil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies", (string)null);
+                });
 
             modelBuilder.Entity("Lubricentro.Domain.EmployeeAggregate.Employee", b =>
                 {
@@ -39,6 +82,12 @@ namespace Lubricentro.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("person.png");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -97,6 +146,10 @@ namespace Lubricentro.Infrastructure.Migrations
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
