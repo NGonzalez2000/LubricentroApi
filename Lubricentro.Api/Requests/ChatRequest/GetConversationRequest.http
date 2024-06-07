@@ -1,0 +1,11 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/chat/getconversation
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6IkdhdG8gR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJlYTJmZjYyLWRjMjAtNGQzZi1iNmY3LThiMWFjMDZmZWQwMSIsImVtYWlsIjoibmljdV9hX2dvbnphbGV6QGhvdG1haWwuY29tIiwiUG9saWN5IjpbIkNoYXRQb2xpY3kiLCJFbXBsb3llZU1vZGlmaWNhdGlvbnNQb2xpY3kiXSwiZXhwIjoxNzEwNzA0MjYyLCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.sqHBR-3OLD0CiD3CSwJav_WiJPVZYkWhY136CF7bgik
+
+
+{
+    "ReceptorId": "8516410F-E26C-4F90-BF07-681DD0093D4B",
+    "SenderId":"BEA2FF62-DC20-4D3F-B6F7-8B1AC06FED01"
+}

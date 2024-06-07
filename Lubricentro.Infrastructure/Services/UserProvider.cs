@@ -1,8 +1,9 @@
-﻿using Lubricentro.Application.Common.Interfaces.Persistence;
+﻿using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.Common.Interfaces.Services;
 using Lubricentro.Domain.RoleAggregate;
 using Lubricentro.Domain.UserAggregate;
 using Lubricentro.Infrastructure.Services.Emails.EmailTemplates;
+using System.Threading;
 
 namespace Lubricentro.Infrastructure.Services
 {
@@ -19,6 +20,25 @@ namespace Lubricentro.Infrastructure.Services
             _userRepository.Add(user);
 
             await _emailService.SendAsync("nico1_a_gonzalez@hotmail.com",username, "nueva cuenta", EmailTemplates.NewAccount(password));
+            return user;
+        }
+        public async Task<User?> RecoverPasswordAsync(string username)
+        {
+            if (await _userRepository.GetUserByEmail(username) is not User user)
+            {
+                return null;
+            }
+
+            string password = _passwordProvider.GenerateRandomPassword();
+
+            user.NewPassword(password);
+
+            _userRepository.Update(user);
+
+            await _emailService.SendAsync("nico1_a_gonzalez@hotmail.com",
+                                          user.UserName,
+                                          "Recuperación de contraseña.",
+                                          EmailTemplates.PasswordRecovery(password));
             return user;
         }
     }

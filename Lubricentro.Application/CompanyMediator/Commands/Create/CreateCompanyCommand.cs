@@ -4,6 +4,6 @@ using MediatR;
 
 namespace Lubricentro.Application.CompanyMediator.Commands.Create;
 
-public record CreateCompanyCommand(string Name,string Cuil) : IRequest<ErrorOr<CompanyResult>>
+public record CreateCompanyCommand(string Name,string Cuil, string Email, string Password) : IRequest<ErrorOr<CompanyResult>>
 {
 }

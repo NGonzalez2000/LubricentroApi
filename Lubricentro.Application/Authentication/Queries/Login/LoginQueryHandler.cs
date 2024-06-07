@@ -1,10 +1,10 @@
 ﻿using ErrorOr;
 using Lubricentro.Application.Common.Interfaces.Authentication;
-using Lubricentro.Application.Common.Interfaces.Persistence;
 using Lubricentro.Domain.Common.Errors;
 using MediatR;
 using Lubricentro.Application.Authentication.Common;
 using Lubricentro.Domain.UserAggregate;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 
 namespace Lubricentro.Application.Authentication.Queries.Login;
 

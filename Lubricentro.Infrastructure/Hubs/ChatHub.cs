@@ -1,5 +1,5 @@
 ﻿using Lubricentro.Application.Common.Interfaces.Hubs;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Domain.ChatMessageAggregate;
 using Lubricentro.Domain.UserAggregate.ValueObjects;
 using Microsoft.AspNetCore.Authorization;

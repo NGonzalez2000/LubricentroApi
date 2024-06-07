@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.CompanyMediator.Common;
 using Lubricentro.Domain.Common.Errors;
 using Lubricentro.Domain.CompanyAggregate;
@@ -18,12 +18,12 @@ public class CreateCompanyCommandHandler(ICompanyRepository companyRepository, I
             return Errors.Companies.Duplicated;
         }
 
-        Company company = Company.Create(request.Name, request.Cuil);
+        Company company = Company.Create(request.Name, request.Cuil, request.Email, request.Password);
 
         _companyRepository.Add(company);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new CompanyResult(company.Id.Value.ToString(), company.Name);
+        return new CompanyResult(company.Id.Value.ToString(), company.Name, company.Cuil, company.Email, company.Password);
     }
 }

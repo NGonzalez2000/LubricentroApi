@@ -10,10 +10,8 @@ using System.Security.Claims;
 namespace Lubricentro.Api.Controllers;
 [Route("[controller]")]
 [Authorize(Policy = "ChatPolicy")]
-public class ChatController(IMapper mapper, ISender mediator) : ApiController
+public class ChatController(IMapper _mapper, ISender _mediator) : ApiController
 {
-    private readonly IMapper _mapper = mapper;
-    private readonly ISender _mediator = mediator;
     [HttpGet("getusers")]
     public async Task<IActionResult> GetUsers()
     {

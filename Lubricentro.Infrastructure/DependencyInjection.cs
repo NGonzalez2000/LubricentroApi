@@ -4,24 +4,27 @@ using Lubricentro.Infrastructure.Authentication;
 using Lubricentro.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Lubricentro.Application.Common.Interfaces.Persistence;
 using Lubricentro.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using Lubricentro.Infrastructure.Persistence.Repositories;
 using Lubricentro.Infrastructure.Persistence.Interceptors;
 using Lubricentro.Domain.PolicyAggregate;
 using Lubricentro.Infrastructure.Services.Emails;
-using Lubricentro.Infrastructure.Hubs;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
+using Lubricentro.Infrastructure.Persistence.Repositories.LubricentroDb;
+using Lubricentro.Application.Common.Interfaces.Persistence.OldDb;
+using Lubricentro.Infrastructure.Persistence.Repositories.OldDb;
+using Lubricentro.Application.Common.Interfaces.Persistence.MigrationDb;
+using Lubricentro.Infrastructure.Persistence.Repositories.MigrationDb;
 
 namespace Lubricentro.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructureAsync(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddPersistance(configuration);
         services.AddAuth(configuration);
@@ -29,7 +32,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddServices(this IServiceCollection services, ConfigurationManager configuration)
+    private static IServiceCollection AddServices(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddScoped<IUserProvider, UserProvider>();
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
@@ -56,7 +59,19 @@ public static class DependencyInjection
         var dbSettings = new DbSettings();
         configuration.Bind(DbSettings.SectionName, dbSettings);
         services.AddDbContext<LubricentroDbContext>(options => options.UseSqlServer(dbSettings.Default));
+        services.AddDbContext<MigrationDbContext>(options => options.UseSqlServer(dbSettings.Migration));
+        services.AddDbContext<OldDbContext>(options => options.UseSqlServer(dbSettings.Old));
+        services.AddLubricentroDb();
+        services.AddMigrationDb();
+        services.AddOldDb();
 
+
+        return services;
+    }
+
+    private static IServiceCollection AddLubricentroDb(this IServiceCollection services)
+    {
+        // BASE SERVER
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LubricentroDbContext>());
         services.AddScoped<PublishDomainEventInterceptor>();
         services.AddScoped<IUserRepository, UserRepository>();
@@ -64,12 +79,31 @@ public static class DependencyInjection
         services.AddScoped<IPolicyRepository, PolicyRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
+        services.AddScoped<ICompanyServiceRepository, CompanyServiceRepository>();
         services.AddScoped<IChatRepository, ChatRepository>();
+        services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<ITaxConditionRepository, TaxConditionRepository>();
+
         return services;
     }
 
-    
-    
+    private static IServiceCollection AddMigrationDb(this IServiceCollection services)
+    {
+        services.AddScoped<ITaxConditionMigrationRepository, TaxConditionMigrationRepository>();
+        services.AddScoped<IClientMigrationRepository, ClientMigrationRepository>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddOldDb(this IServiceCollection services)
+    {
+        services.AddScoped<IOldClientRepository, OldClientRepository>();
+        services.AddScoped<IOldTaxConditionRepository, OldTaxConditionRepository>();
+        return services;
+    }
+
+
     private static IServiceCollection AddAuth(this IServiceCollection services, ConfigurationManager configuration)
     {
 

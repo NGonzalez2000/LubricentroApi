@@ -20,9 +20,9 @@ namespace Lubricentro.Infrastructure.Migrations
             MigrationHelper.RoleQueryWriter(migrationBuilder, masterRole);
             MigrationHelper.RoleQueryWriter(migrationBuilder, policylessRole);
 
-            MigrationHelper.PolicyQueryWriter(migrationBuilder, "ChatPolicy");
-            MigrationHelper.PolicyQueryWriter(migrationBuilder, "ServerPolicy");
-            MigrationHelper.PolicyQueryWriter(migrationBuilder, "EmployeeModificationsPolicy");
+            MigrationHelper.AddPolicy(migrationBuilder, "ChatPolicy");
+            MigrationHelper.AddPolicy(migrationBuilder, "ServerPolicy");
+            MigrationHelper.AddPolicy(migrationBuilder, "EmployeeModificationsPolicy");
 
 
             User adminUser = User.Create("nico1_a_gonzalez@hotmail.com", "legolas27", adminRole);

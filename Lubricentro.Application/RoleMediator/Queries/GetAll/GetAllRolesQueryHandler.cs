@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.RoleMediator.Common;
 using Lubricentro.Domain.RoleAggregate;
 using MediatR;

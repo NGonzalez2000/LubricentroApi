@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 using Lubricentro.Application.ChatMediator.Common;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.Common.Interfaces.Services;
 using Lubricentro.Domain.Common.Errors;
 using Lubricentro.Domain.UserAggregate.ValueObjects;

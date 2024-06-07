@@ -1,0 +1,23 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/Migrations/Clients/Update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQ2xpZW50UG9saWN5IiwiTWlncmF0aW9uUG9saWN5Il0sImV4cCI6MTcxNDM2MDI4NSwiaXNzIjoiTHVicmljZW50cm8iLCJhdWQiOiJMdWJyaWNlbnRybyJ9.eKmngEq7nMHAUUalpRhzzSh1tW47bvDik6X_D1YiKOg
+
+{
+    "id": "2145c16e-90e2-4c14-afc8-1cf1db44d457",
+    "country": "",
+    "state": "",
+    "city": "",
+    "street": "",
+    "postalCode": "",
+    "taxConditionId": "2b2164c9-68b1-426a-a585-6b6cb0507ed4",
+    "clientName": "PRESUPUESTOS",
+    "cuil": "",
+    "email": "",
+    "phoneNumber": "",
+    "cellphoneNumber": "",
+    "observation": "",
+    "hasCheckingAccount": true,
+    "isWholesaler": false
+  }

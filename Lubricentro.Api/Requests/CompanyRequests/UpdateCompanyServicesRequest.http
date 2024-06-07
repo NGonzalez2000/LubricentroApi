@@ -1,0 +1,16 @@
+@Api_HostAddress = http://localhost:5198
+
+GET {{Api_HostAddress}}/migrations/clients
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQ2xpZW50UG9saWN5IiwiTWlncmF0aW9uUG9saWN5IiwiQ29tcGFueVBvbGljeSJdLCJleHAiOjE3MTc0NTA4NzIsImlzcyI6Ikx1YnJpY2VudHJvIiwiYXVkIjoiTHVicmljZW50cm8ifQ.e-YU8VqWZXO77y8LyySGmYVtXbmdNGHLGqPY2QEJvxY
+
+
+{
+    "CompanyServices":[
+        {
+            "id": "4412f93a-0862-48b9-80ef-1a7fda671c13",
+            "name": "EmailService",
+            "company": null
+        }
+    ]
+}

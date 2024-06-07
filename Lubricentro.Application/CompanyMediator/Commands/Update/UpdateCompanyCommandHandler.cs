@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.CompanyMediator.Common;
 using Lubricentro.Domain.Common.Errors;
 using Lubricentro.Domain.CompanyAggregate;
@@ -26,11 +26,13 @@ public class UpdateCompanyCommandHandler(ICompanyRepository companyRepository, I
 
         company.ChangeCompanyName(request.Name);
         company.ChangeCuil(request.Cuil);
+        company.ChangeEmail(request.Email);
+        company.ChangePassword(request.Password);
 
         _companyRepository.Update(company);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new CompanyResult(company.Id.Value.ToString(), company.Name);
+        return new CompanyResult(company.Id.Value.ToString(), company.Name, company.Cuil, company.Email, company.Password);
     }
 }

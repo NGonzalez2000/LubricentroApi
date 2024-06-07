@@ -1,10 +1,10 @@
-﻿@Api_HostAddress = http://localhost:5198
+﻿@Api_HostAddress = https://www.lubricentroapi.com
 
 POST {{Api_HostAddress}}/Role/Create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NTE2NDEwZi1lMjZjLTRmOTAtYmYwNy02ODFkZDAwOTNkNGIiLCJlbWFpbCI6Im5pY28xX2FfZ29uemFsZXpAaG90bWFpbC5jb20iLCJQZXJtaXNzaW9ucyI6IltcIkNoYXRQb2xpY3lcIixcIlNlcnZlclBvbGljeVwiLFwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5XCJdIiwiZXhwIjoxNzA4MDM0MDQ3LCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.SCZ5pqXtzvoXIXLFUdbzMFfwIbyzjMRbpb0iI162mKU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6Ijg1MTY0MTBmLWUyNmMtNGY5MC1iZjA3LTY4MWRkMDA5M2Q0YiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJDaGF0UG9saWN5IiwiU2VydmVyUG9saWN5IiwiQ29tcGFueVBvbGljeSIsIkVtcGxveWVlTW9kaWZpY2F0aW9uc1BvbGljeSJdLCJleHAiOjE3MTA3NTY0NjAsImlzcyI6Ikx1YnJpY2VudHJvIiwiYXVkIjoiTHVicmljZW50cm8ifQ.kL1Sh_ABgbAPSaKF_xF4ET_n1dPHvHcEYLsHT3iHaW0
 
 {
-  "name": "PrimerRol",
-  "policies": ["0D1B1EC6-C3A1-4D77-93B3-0DF6F1515991"]
+  "name": "SegundoRol",
+  "policies": ["0d1b1ec6-c3a1-4d77-93b3-0df6f1515991","7df30cf2-4e67-4712-8e30-d43eb133df4a"]
 }

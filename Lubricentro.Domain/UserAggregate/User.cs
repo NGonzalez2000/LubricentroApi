@@ -16,10 +16,26 @@ public class User : AggregateRoot<UserId, Guid>
         Role = role;
         Salt = salt;
     }
-    public string Salt { get; } = null!;
     public string UserName { get; } = null!;
-    public string Password { get; } = null!;
+    public string Password { get; private set; } = null!;
+    public string Salt { get; private set; } = null!;
     public Role Role { get; set; } 
+
+    public void NewPassword(string password)
+    {
+        byte[] salt = new byte[128 / 8];
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(salt);
+        }
+        string saltstr = Convert.ToBase64String(salt);
+        string saltedPassword = password + saltstr;
+
+        // Calcular el hash de la cadena
+        byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(saltedPassword));
+        Password = Convert.ToBase64String(hash);
+        Salt = saltstr;
+    }
     public static User Create(string userName, string password, Role role)
     {
         byte[] salt = new byte[128 / 8];

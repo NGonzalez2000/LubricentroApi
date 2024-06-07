@@ -1,5 +1,5 @@
 ﻿using Lubricentro.Application.Common.Interfaces.Authentication;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.Common.Interfaces.Services;
 using Lubricentro.Domain.EmployeeAggregate;
 using Lubricentro.Domain.PolicyAggregate;

@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.CompanyMediator.Common;
 using MediatR;
 
@@ -15,7 +15,7 @@ public class GetAllCompaniesQueryHandler(ICompanyRepository companyRepository) :
 
         foreach (var company in companies)
         {
-            result.Add(new(company.Id.Value.ToString(), company.Name));
+            result.Add(new(company.Id.Value.ToString(), company.Name, company.Cuil, company.Email, company.Password));
         }
 
         return result;

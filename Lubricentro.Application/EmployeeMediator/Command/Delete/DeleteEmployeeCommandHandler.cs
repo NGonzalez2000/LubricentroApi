@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using Lubricentro.Application.Common.Interfaces.Persistence;
+using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.EmployeeMediator.Common;
 using Lubricentro.Domain.Common.Errors;
 using Lubricentro.Domain.EmployeeAggregate.ValueObjects;

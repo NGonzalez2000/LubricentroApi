@@ -1,0 +1,23 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/client/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQ2xpZW50UG9saWN5Il0sImV4cCI6MTcxMjc4NzUwMSwiaXNzIjoiTHVicmljZW50cm8iLCJhdWQiOiJMdWJyaWNlbnRybyJ9.UrX5zdbG2DBV407KBav1Jy2ry7XBASvqDz8lm2lyj1I
+
+
+{
+    "Country":"Argentina",
+    "State":"Santa Fe",
+    "City":"Galvez",
+    "Street":"Ayacucho 220",
+    "PostalCode":"2252",
+    "TaxConditionId": "eebf68ca-e1f3-4ba9-adbf-51caf3b09861",
+    "ClientName":"Nahuel Mohr",
+    "Cuil":"20423318816",
+    "Email":"nico@test.com",
+    "PhoneNumber":"432614",
+    "CellphoneNumber":"15123456",
+    "Observation":"This is an observation",
+    "HasCheckingAccount": true,
+    "IsWholesaler": false
+}
