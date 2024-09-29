@@ -2,22 +2,40 @@
 
 POST {{Api_HostAddress}}/client/update
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQ2xpZW50UG9saWN5Il0sImV4cCI6MTcxMjc4NzUwMSwiaXNzIjoiTHVicmljZW50cm8iLCJhdWQiOiJMdWJyaWNlbnRybyJ9.UrX5zdbG2DBV407KBav1Jy2ry7XBASvqDz8lm2lyj1I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJQcm92aWRlclBvbGljeSIsIkNsaWVudFBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiTWlncmF0aW9uUG9saWN5Il0sImV4cCI6MTcyMTkxNjkxNCwiaXNzIjoiTHVicmljZW50cm8iLCJhdWQiOiJMdWJyaWNlbnRybyJ9.jRSgBa3U5-8D1hddLWxoVr2rYvK3An4GCPfYYYLhf24
 
 
 {
-    "Id":"b797f6cf-84b6-4a09-96e2-4bef525d11a0",
+    "Id":"6e35d201-ef5f-49d8-96f2-060a0a77a51f",
     "Country":"Italia",
     "State":"Santa Fe",
     "City":"Galvez",
     "Street":"Ayacucho 220",
     "PostalCode":"2252",
-    "TaxConditionId": "8d94c627-f768-43bf-95ef-e6877cd43dfa",
+    "TaxConditionId": "0883f130-7427-49c5-a8a9-7288fc47c3ab",
     "ClientName":"Nicolas Agustin Gonzalez",
     "Cuil":"20423318806",
-    "Email":"nico@test.com",
-    "PhoneNumber":"432614",
-    "CellphoneNumber":"15123456",
+    "hasEmailNotification": true,
+  "emails": [
+    {
+      "id": "6e373c02-4420-44e0-b8ed-9790de89a33a",
+      "value": "nicoUpdated@test.com",
+      "isActive": true
+    }
+  ],
+  "hasPhoneNotification": true,
+  "phones": [
+    {
+      "id": "ac90fc11-cda8-4dd6-bca9-c17ec6768d07",
+      "value": "3404 643216",
+      "isActive": true
+    },
+    {
+      "id": "abe3958a-1dc5-420e-9717-fa03f3fbc3b5",
+      "value": "3404 593076",
+      "isActive": false
+    }
+  ],
     "Observation":"This is an observation",
     "HasCheckingAccount": true,
     "IsWholesaler": false

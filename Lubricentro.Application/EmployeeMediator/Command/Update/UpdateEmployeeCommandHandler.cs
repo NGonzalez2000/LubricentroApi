@@ -35,6 +35,7 @@ public class UpdateEmployeeCommandHandler(IEmployeeRepository employeeRepository
         employee.ChangeImageName(imageName);
         employee.ChangeFirstName(request.FirstName);
         employee.ChangeLastName(request.LastName);
+        employee.ChangeCuil(request.Cuil);
 
         var role = await _roleRepository.GetById(RoleId.Create(request.RoleId));
 
@@ -50,7 +51,7 @@ public class UpdateEmployeeCommandHandler(IEmployeeRepository employeeRepository
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new EmployeeResult(image,
-            employee.Id.Value.ToString(), employee.FirstName, employee.LastName, employee.Email,
+            employee.Id.Value.ToString(), employee.FirstName, employee.LastName,employee.Cuil, employee.Email,
             employee.User.Role.Id.Value.ToString(), employee.User.Role.Name);
     }
 

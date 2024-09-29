@@ -1,4 +1,6 @@
-﻿using Lubricentro.Contracts.TaxContitions;
+﻿using Lubricentro.Contracts.Emails;
+using Lubricentro.Contracts.Phones;
+using Lubricentro.Contracts.TaxContitions;
 
 namespace Lubricentro.Contracts.Clients;
 
@@ -12,9 +14,10 @@ public record ClientResponse(string Id,
                              TaxConditionResponse TaxCondition,
                              string ClientName,
                              string Cuil,
-                             string Email,
-                             string PhoneNumber,
-                             string CellphoneNumber,
+                             bool HasEmailNotification,
+                             List<EmailResponse> Emails,
+                             bool HasPhoneNotification,
+                             List<PhoneResponse> Phones,
                              string Observation,
                              bool HasCheckingAccount,
                              bool IsWholesaler)

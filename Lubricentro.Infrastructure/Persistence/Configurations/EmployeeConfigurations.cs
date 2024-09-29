@@ -34,5 +34,7 @@ internal class EmployeeConfigurations : IEntityTypeConfiguration<Employee>
 
         builder.Property(e => e.Email)
             .HasMaxLength(100);
+        builder.Property(e => e.Cuil)
+            .HasMaxLength(11);
     }
 }

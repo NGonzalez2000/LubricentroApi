@@ -29,6 +29,6 @@ internal class DeleteClientCommandHandler(IClientRepository clientRepository, IA
 
         TaxConditionResult taxConditionResult = new("","",'A',false);
 
-        return new ClientResult(client.Id.Value.ToString(), client.Address, taxConditionResult, client.ClientName, client.Cuil, client.Email, client.PhoneNumber, client.CellphoneNumber, client.Observation, client.HasCheckingAccount, client.IsWholesaler);
+        return new ClientResult(client.Id.Value.ToString(), client.Address, taxConditionResult, client.ClientName, client.Cuil,client.HasEmailNotification, [], client.HasPhoneNotification, [], client.Observation, client.HasCheckingAccount, client.IsWholesaler);
     }
 }

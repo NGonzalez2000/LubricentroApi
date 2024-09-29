@@ -1,5 +1,5 @@
 ﻿namespace Lubricentro.Contracts.Companies;
 
-public record CompanyResponse(string Id, string Name, string Cuil, string Password)
+public record CompanyResponse(string Id, string Name, string Cuil,string Email, string Password)
 {
 }

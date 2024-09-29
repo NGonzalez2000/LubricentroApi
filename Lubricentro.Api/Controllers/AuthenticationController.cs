@@ -5,6 +5,7 @@ using Lubricentro.Application.Authentication.Queries.Login;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;
 using Lubricentro.Application.Authentication.Commands.PasswordRecovery;
+using Lubricentro.Application.Authentication.Commands.PasswordChange;
 
 namespace Lubricentro.Api.Controllers;
 
@@ -34,6 +35,17 @@ public class AuthenticationController(ISender _mediator, IMapper _mapper) : ApiC
     public async Task<IActionResult> PasswordRecovery(PasswordRecoveryRequest request)
     {
         var command = _mapper.Map<PasswordRecoveryCommand>(request);
+        var authResult = await _mediator.Send(command);
+
+        return authResult.Match(
+             authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
+             Problem
+         );
+    }
+    [HttpPost("PasswordChange")]
+    public async Task<IActionResult> PasswordChange(PasswordChangeRequest request)
+    {
+        var command = _mapper.Map<PasswordChangeCommand>(request);
         var authResult = await _mediator.Send(command);
 
         return authResult.Match(

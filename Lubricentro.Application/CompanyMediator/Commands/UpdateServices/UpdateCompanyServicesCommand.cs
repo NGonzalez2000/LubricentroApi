@@ -8,4 +8,4 @@ public record UpdateCompanyServicesCommand(List<UpdateCompanyService> CompanySer
 {
 }
 
-public record UpdateCompanyService(Guid Id, string Name, Guid CompanyId);
+public record UpdateCompanyService(Guid Id, Guid CompanyId);

@@ -2,7 +2,7 @@
 
 POST {{Api_HostAddress}}/client/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQ2xpZW50UG9saWN5Il0sImV4cCI6MTcxMjc4NzUwMSwiaXNzIjoiTHVicmljZW50cm8iLCJhdWQiOiJMdWJyaWNlbnRybyJ9.UrX5zdbG2DBV407KBav1Jy2ry7XBASvqDz8lm2lyj1I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJQcm92aWRlclBvbGljeSIsIkNsaWVudFBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiTWlncmF0aW9uUG9saWN5Il0sImV4cCI6MTcyMTkxNjkxNCwiaXNzIjoiTHVicmljZW50cm8iLCJhdWQiOiJMdWJyaWNlbnRybyJ9.jRSgBa3U5-8D1hddLWxoVr2rYvK3An4GCPfYYYLhf24
 
 
 {
@@ -11,12 +11,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY
     "City":"Galvez",
     "Street":"Ayacucho 220",
     "PostalCode":"2252",
-    "TaxConditionId": "eebf68ca-e1f3-4ba9-adbf-51caf3b09861",
+    "TaxConditionId": "0883f130-7427-49c5-a8a9-7288fc47c3ab",
     "ClientName":"Nahuel Mohr",
-    "Cuil":"20423318816",
-    "Email":"nico@test.com",
-    "PhoneNumber":"432614",
-    "CellphoneNumber":"15123456",
+    "Cuil":"20423318818",
+    "HasEmailNotification": true,
+    "Emails":[ {"id": "00000000-0000-0000-0000-000000000000","value":"nico@test.com", "isactive":true},
+    {"id": "00000000-0000-0000-0000-000000000000","value":"nico2@test.com", "isactive":false}],
+    "HasPhoneNotification": true,
+    "Phones":[ {"id": "00000000-0000-0000-0000-000000000000","value":"3404 643216", "isactive":true},
+    {"id": "00000000-0000-0000-0000-000000000000","value":"3404 593076", "isactive":false}],
     "Observation":"This is an observation",
     "HasCheckingAccount": true,
     "IsWholesaler": false

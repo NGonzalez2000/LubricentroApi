@@ -18,6 +18,6 @@ internal class CompanyRepository(LubricentroDbContext dbContext) : Repository<Co
     }
     public Task<Company?> GetByIdAsync(CompanyId Id)
     {
-        return DbContext.Companies.FirstOrDefaultAsync(x => x.Id == Id);
+        return DbContext.Companies.Include(c => c.Branches).Include(c => c.Services).FirstOrDefaultAsync(x => x.Id == Id);
     }
 }

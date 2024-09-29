@@ -11,6 +11,7 @@ public class Company : AggregateRoot<CompanyId,Guid>
     public string Email { get; private set; } 
     public string Password { get; private set; } 
     public List<CompanyService> Services { get; private set; }
+    public List<Branch> Branches { get; private set; }
     private Company(CompanyId id, string name, string cuil, string email, string password)
         : base(id)
     {
@@ -19,6 +20,7 @@ public class Company : AggregateRoot<CompanyId,Guid>
         Email = email;
         Password = password;
         Services = [];
+        Branches = [];
     }
 
     public static Company Create(string name,string cuil, string email, string password)
@@ -26,6 +28,10 @@ public class Company : AggregateRoot<CompanyId,Guid>
         return new(CompanyId.CreateUnique(), name, cuil, email, password);
     }
 
+    public void AddBranch(Branch branch)
+    {
+        Branches.Add(branch);
+    }
     public void ChangeCompanyName(string name)
     {
         Name = name;

@@ -9,9 +9,12 @@ public class CreateClientMigrationCommandValidator : AbstractValidator<CreateCli
     {
         RuleFor(x => x.ClientName).NotEmpty().WithMessage("Necesita un nombre");
         RuleFor(x => x.TaxConditionId).NotEmpty().WithMessage("Necesita Cond. Cliente");
-        //RuleFor(x => x.Cuil).Must(cuilService.ValidateCuil).WithMessage("CUIL/CUIT Invalido");
+        RuleFor(x => x.Cuil).Must(cuilService.ValidateCuil).WithMessage("CUIL/CUIT Invalido");
         RuleFor(x => x.ClientName).Must(name => !name.Contains("NO USAR")).WithMessage("NO USAR!");
-        RuleFor(x => x.CellphoneNumber).MaximumLength(20);
-        RuleFor(x => x.PhoneNumber).MaximumLength(20);
+        RuleForEach(x => x.Phones).ChildRules(phone =>
+        {
+            phone.RuleFor(p => p.Value).MaximumLength(10).WithMessage("El número de teléfono no puede exceder los 10 caracteres.");
+            phone.RuleFor(p => p.Value).Matches(@"^\d+$").WithMessage("El numero de teléfono debe contener solo números");
+        });
     }
 }

@@ -6,6 +6,8 @@ internal class CreateClientCommandValidation : AbstractValidator<CreateClientCom
 {
     public CreateClientCommandValidation()
     {
-        RuleFor(x => x.ClientName).NotEmpty().WithMessage("Debe asignarle un nombre");
+        RuleFor(x => x.ClientName)
+            .NotEmpty()
+            .WithMessage("Debe asignarle un nombre");
     }
 }

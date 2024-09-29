@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Lubricentro.Application.CompanyMediator.Commands.Delete;
 
-public class DeleteCompanyCommandHandler(ICompanyRepository companyRepository, IUnitOfWork unitOfWork) : IRequestHandler<DeleteCompanyCommand, ErrorOr<CompanyResult>>
+public class DeleteCompanyCommandHandler(ICompanyRepository companyRepository,ICompanyServiceRepository companyServiceRepository, IUnitOfWork unitOfWork) : IRequestHandler<DeleteCompanyCommand, ErrorOr<CompanyResult>>
 {
     private readonly ICompanyRepository _companyRepository = companyRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
@@ -18,7 +18,19 @@ public class DeleteCompanyCommandHandler(ICompanyRepository companyRepository, I
         {
             return Errors.Companies.NotFound;
         }
-
+        var companyServices = await companyServiceRepository.GetAllAsync();
+        foreach(var service in companyServices)
+        {
+            if(service.Company is null)
+            {
+                continue;
+            }
+            if(service.Company.Id == company.Id)
+            {
+                service.SetCompany(null);
+            }
+        }
+        companyServiceRepository.UpdateAllAsync(companyServices);
         _companyRepository.Delete(company);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -17,7 +17,7 @@ namespace Lubricentro.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -57,6 +57,25 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.ToTable("Addresses", (string)null);
                 });
 
+            modelBuilder.Entity("Lubricentro.Domain.BrandAggregate.Brand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProviderId");
+
+                    b.ToTable("Brands", (string)null);
+                });
+
             modelBuilder.Entity("Lubricentro.Domain.ChatMessageAggregate.ChatMessage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -89,11 +108,6 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CellphoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<string>("ClientName")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -104,12 +118,13 @@ namespace Lubricentro.Infrastructure.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
                     b.Property<bool>("HasCheckingAccount")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasEmailNotification")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasPhoneNotification")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsWholesaler")
@@ -118,11 +133,6 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.Property<string>("Observation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
 
                     b.Property<Guid>("TaxConditionId")
                         .HasColumnType("uniqueidentifier");
@@ -154,9 +164,46 @@ namespace Lubricentro.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Companies", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.Branch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PointOfSale")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("Branches", (string)null);
                 });
 
             modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.CompanyService", b =>
@@ -178,10 +225,102 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.ToTable("CompanyServices", (string)null);
                 });
 
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.Stock", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stocks", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.StockItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Cuantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("LocationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("StockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("StockItems", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.StockItemLocation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("X")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Y")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Z")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StockItemLocantions", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.EmailAggregates.Email", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ClientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ProviderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ProviderId");
+
+                    b.ToTable("Emails", (string)null);
+                });
+
             modelBuilder.Entity("Lubricentro.Domain.EmployeeAggregate.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cuil")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -214,6 +353,37 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.ToTable("Employees", (string)null);
                 });
 
+            modelBuilder.Entity("Lubricentro.Domain.PhoneAggregate.Phone", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ClientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ProviderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ProviderId");
+
+                    b.ToTable("Phones", (string)null);
+                });
+
             modelBuilder.Entity("Lubricentro.Domain.PolicyAggregate.Policy", b =>
                 {
                     b.Property<Guid>("Id")
@@ -227,6 +397,96 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Policies", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.ProductAggregate.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Barcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsUsd")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsWholesaler")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("ListPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MarkupPercentage")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("SellPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("ProviderId");
+
+                    b.ToTable("Products", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.ProviderAggregate.Provider", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cuil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Observation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TaxConditionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("TaxConditionId");
+
+                    b.ToTable("Providers", (string)null);
                 });
 
             modelBuilder.Entity("Lubricentro.Domain.RoleAggregate.Role", b =>
@@ -295,6 +555,96 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("Lubricentro.Domain.VehicleAggregates.Entities.VehicleFactory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VehicleFactories", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.VehicleAggregates.Entities.VehicleModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsLight")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("VehicleFactoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleFactoryId");
+
+                    b.ToTable("VehicleModels", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.VehicleAggregates.Entities.VehicleSpecification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Specification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VehicleSpecifications", (string)null);
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.VehicleAggregates.Vehicle", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FactoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ModelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Observation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Plate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("SpecificationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Year")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FactoryId");
+
+                    b.HasIndex("ModelId");
+
+                    b.HasIndex("Plate")
+                        .IsUnique();
+
+                    b.HasIndex("SpecificationId");
+
+                    b.ToTable("Vehicles", (string)null);
+                });
+
             modelBuilder.Entity("PolicyRole", b =>
                 {
                     b.Property<Guid>("PoliciesId")
@@ -308,6 +658,17 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.HasIndex("RolesId");
 
                     b.ToTable("PolicyRole");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.BrandAggregate.Brand", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.ProviderAggregate.Provider", "Provider")
+                        .WithMany("Brands")
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("Lubricentro.Domain.ClientAggregate.Client", b =>
@@ -329,6 +690,29 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.Navigation("TaxCondition");
                 });
 
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.Branch", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.AddressAggregate.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lubricentro.Domain.CompanyAggregate.Company", null)
+                        .WithMany("Branches")
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("Lubricentro.Domain.CompanyAggregate.Entities.Stock", "Stock")
+                        .WithMany()
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Stock");
+                });
+
             modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.CompanyService", b =>
                 {
                     b.HasOne("Lubricentro.Domain.CompanyAggregate.Company", "Company")
@@ -336,6 +720,40 @@ namespace Lubricentro.Infrastructure.Migrations
                         .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.StockItem", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.CompanyAggregate.Entities.StockItemLocation", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lubricentro.Domain.ProductAggregate.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lubricentro.Domain.CompanyAggregate.Entities.Stock", null)
+                        .WithMany("Items")
+                        .HasForeignKey("StockId");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.EmailAggregates.Email", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.ClientAggregate.Client", null)
+                        .WithMany("Emails")
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("Lubricentro.Domain.ProviderAggregate.Provider", null)
+                        .WithMany("Emails")
+                        .HasForeignKey("ProviderId");
                 });
 
             modelBuilder.Entity("Lubricentro.Domain.EmployeeAggregate.Employee", b =>
@@ -349,6 +767,55 @@ namespace Lubricentro.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Lubricentro.Domain.PhoneAggregate.Phone", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.ClientAggregate.Client", null)
+                        .WithMany("Phones")
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("Lubricentro.Domain.ProviderAggregate.Provider", null)
+                        .WithMany("Phones")
+                        .HasForeignKey("ProviderId");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.ProductAggregate.Product", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.BrandAggregate.Brand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lubricentro.Domain.ProviderAggregate.Provider", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Provider");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.ProviderAggregate.Provider", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.AddressAggregate.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lubricentro.Domain.TaxConditionAggregate.TaxCondition", "TaxCondition")
+                        .WithMany()
+                        .HasForeignKey("TaxConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("TaxCondition");
+                });
+
             modelBuilder.Entity("Lubricentro.Domain.UserAggregate.User", b =>
                 {
                     b.HasOne("Lubricentro.Domain.RoleAggregate.Role", "Role")
@@ -358,6 +825,40 @@ namespace Lubricentro.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.VehicleAggregates.Entities.VehicleModel", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.VehicleAggregates.Entities.VehicleFactory", null)
+                        .WithMany("Models")
+                        .HasForeignKey("VehicleFactoryId");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.VehicleAggregates.Vehicle", b =>
+                {
+                    b.HasOne("Lubricentro.Domain.VehicleAggregates.Entities.VehicleFactory", "Factory")
+                        .WithMany()
+                        .HasForeignKey("FactoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lubricentro.Domain.VehicleAggregates.Entities.VehicleModel", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lubricentro.Domain.VehicleAggregates.Entities.VehicleSpecification", "Specification")
+                        .WithMany()
+                        .HasForeignKey("SpecificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Factory");
+
+                    b.Navigation("Model");
+
+                    b.Navigation("Specification");
                 });
 
             modelBuilder.Entity("PolicyRole", b =>
@@ -375,9 +876,37 @@ namespace Lubricentro.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Lubricentro.Domain.ClientAggregate.Client", b =>
+                {
+                    b.Navigation("Emails");
+
+                    b.Navigation("Phones");
+                });
+
             modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Company", b =>
                 {
+                    b.Navigation("Branches");
+
                     b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.CompanyAggregate.Entities.Stock", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.ProviderAggregate.Provider", b =>
+                {
+                    b.Navigation("Brands");
+
+                    b.Navigation("Emails");
+
+                    b.Navigation("Phones");
+                });
+
+            modelBuilder.Entity("Lubricentro.Domain.VehicleAggregates.Entities.VehicleFactory", b =>
+                {
+                    b.Navigation("Models");
                 });
 #pragma warning restore 612, 618
         }

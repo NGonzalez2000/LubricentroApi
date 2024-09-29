@@ -16,7 +16,7 @@ namespace Lubricentro.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            MigrationHelper.PolicyRemover(migrationBuilder, "MigrationPolicy");
+            MigrationHelper.RemovePolicy(migrationBuilder, "MigrationPolicy");
         }
     }
 }

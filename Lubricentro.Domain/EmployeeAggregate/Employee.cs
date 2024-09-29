@@ -14,11 +14,13 @@ public sealed class Employee : AggregateRoot<EmployeeId, Guid>
         FirstName = firstName;
         LastName = lastName;
         Email = email;
+        Cuil = "";
     }
     public string ImageName { get; private set; }
     public User User { get; set; }
     public string FirstName { get; private set; } = null!;
     public string LastName { get; private set; } = null!;
+    public string Cuil { get; private set; } = null!;
     public string Email { get; private set; } = null!;
 
     public static Employee Create(string imageName, User user, string firstName, string lastName, string email)
@@ -45,6 +47,10 @@ public sealed class Employee : AggregateRoot<EmployeeId, Guid>
     public void ChangeLastName(string lastName)
     {
         LastName = lastName;
+    }
+    public void ChangeCuil(string cuil)
+    { 
+        Cuil = cuil.Trim(); 
     }
 #pragma warning disable CS8618 // Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.
     private Employee() { }

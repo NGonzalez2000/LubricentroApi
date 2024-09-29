@@ -29,6 +29,7 @@ public class GetEmployeesQueryHandler(IEmployeeRepository employeeRepository, II
                 employee.Id.Value.ToString(),
                            employee.FirstName,
                            employee.LastName,
+                           employee.Cuil,
                            employee.Email,
                            employee.User.Role.Id.Value.ToString(),
                            employee.User.Role.Name));

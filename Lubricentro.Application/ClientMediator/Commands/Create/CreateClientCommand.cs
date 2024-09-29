@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using Lubricentro.Application.ClientMediator.Common;
-using Lubricentro.Domain.AddressAggregate;
+using Lubricentro.Application.EmailMediator;
+using Lubricentro.Application.PhoneMediator;
 using MediatR;
 
 namespace Lubricentro.Application.ClientMediator.Commands.Create;
@@ -13,9 +14,10 @@ public record CreateClientCommand(string Country,
                                   Guid TaxConditionId,
                                   string ClientName,
                                   string Cuil,
-                                  string Email,
-                                  string PhoneNumber,
-                                  string CellphoneNumber,
+                                  bool HasEmailNotification,
+                                  List<EmailCommand> Emails,
+                                  bool HasPhoneNotification,
+                                  List<PhoneCommand> Phones,
                                   string Observation,
                                   bool HasCheckingAccount,
                                   bool IsWholesaler) : IRequest<ErrorOr<ClientResult>>

@@ -70,7 +70,7 @@ namespace Lubricentro.Infrastructure.Migrations
             migrationBuilder.DropTable(
                 name: "Addresses");
 
-            MigrationHelper.PolicyRemover(migrationBuilder, "ClientPolicy");
+            MigrationHelper.RemovePolicy(migrationBuilder, "ClientPolicy");
         }
     }
 }

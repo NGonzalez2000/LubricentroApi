@@ -59,7 +59,7 @@ public class CreateEmployeeCommandHandler(IRoleRepository roleRepositroy,IEmploy
 
         // return the new Employee
         return new EmployeeResult(image,
-                 employee.Id.Value.ToString(), employee.FirstName, employee.LastName, employee.Email,
+                 employee.Id.Value.ToString(), employee.FirstName, employee.LastName,employee.Cuil, employee.Email,
                 employee.User.Role.Id.Value.ToString(), employee.User.Role.Name);
     }
 }

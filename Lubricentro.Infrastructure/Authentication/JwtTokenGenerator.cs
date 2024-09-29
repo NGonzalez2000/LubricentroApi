@@ -1,6 +1,7 @@
 ﻿using Lubricentro.Application.Common.Interfaces.Authentication;
 using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.Common.Interfaces.Services;
+using Lubricentro.Domain.CompanyAggregate.ValueObjects;
 using Lubricentro.Domain.EmployeeAggregate;
 using Lubricentro.Domain.PolicyAggregate;
 using Lubricentro.Domain.UserAggregate;
@@ -18,7 +19,7 @@ public  class JwtTokenGenerator(IDateTimeProvider dateTimeProvider,IServiceProvi
     private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
     private readonly JwtSettings _jwtSettings = jwtSettings.Value;
     private readonly IServiceProvider _serviceProvider = serviceProvider;
-    public async Task<string> GenerateToken(User user)
+    public async Task<string> GenerateToken(User user, BranchId branchId)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
@@ -46,7 +47,8 @@ public  class JwtTokenGenerator(IDateTimeProvider dateTimeProvider,IServiceProvi
         [
             new Claim("UserName", name),
             new Claim(ClaimTypes.NameIdentifier, user.Id.Value.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, user.UserName)
+            new Claim(JwtRegisteredClaimNames.Email, user.UserName),
+            new Claim("BranchId", branchId.Value.ToString())
         ];
 
 
@@ -55,12 +57,6 @@ public  class JwtTokenGenerator(IDateTimeProvider dateTimeProvider,IServiceProvi
         {
             claims.Add(new("Policy", policy.Name));
         }
-        
-
-
-        
-
-
 
         var secuiryToken = new JwtSecurityToken(
             issuer: _jwtSettings.Issuer,

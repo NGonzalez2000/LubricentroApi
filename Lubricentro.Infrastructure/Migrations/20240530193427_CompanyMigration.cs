@@ -25,7 +25,7 @@ namespace Lubricentro.Infrastructure.Migrations
             migrationBuilder.DropColumn(
                 name: "Email",
                 table: "Companies");
-            MigrationHelper.PolicyRemover(migrationBuilder, "CompanyPolicy");
+            MigrationHelper.RemovePolicy(migrationBuilder, "CompanyPolicy");
         }
     }
 }

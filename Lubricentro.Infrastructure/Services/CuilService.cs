@@ -6,6 +6,7 @@ public class CuilService : ICuilService
 {
     public bool ValidateCuil(string cuil)
     {
+        if (cuil.Length < 9 && cuil.Length > 6) return true;
         if (cuil.Length != 11) return false;
 
 

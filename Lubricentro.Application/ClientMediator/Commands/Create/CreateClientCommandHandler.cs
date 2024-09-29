@@ -1,13 +1,18 @@
 ﻿using ErrorOr;
 using Lubricentro.Application.ClientMediator.Common;
 using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
+using Lubricentro.Application.EmailMediator;
+using Lubricentro.Application.PhoneMediator;
 using Lubricentro.Application.TaxConditionMediator.Common;
 using Lubricentro.Domain.AddressAggregate;
 using Lubricentro.Domain.ClientAggregate;
 using Lubricentro.Domain.Common.Errors;
+using Lubricentro.Domain.EmailAggregates;
+using Lubricentro.Domain.PhoneAggregate;
 using Lubricentro.Domain.TaxConditionAggregate;
 using Lubricentro.Domain.TaxConditionAggregate.ValueObjects;
 using MediatR;
+using Microsoft.AspNetCore.Http.Json;
 
 namespace Lubricentro.Application.ClientMediator.Commands.Create;
 
@@ -30,14 +35,45 @@ internal class CreateClientCommandHandler(IClientRepository clientRepository, IT
 
         var address = Address.Create(request.Country, request.State, request.City, request.Street, request.PostalCode);
 
-        var client = Client.Create(address, taxCondition, request.ClientName, request.Cuil, request.Email, request.PhoneNumber, request.CellphoneNumber, request.Observation, request.HasCheckingAccount, request.IsWholesaler);
+        List<Email> emails = [];
+        foreach(var email in request.Emails)
+        {
+            emails.Add(Email.Create(email.Value, email.IsActive));
+        }
+
+        List<Phone> phones = [];
+        foreach (var phone in request.Phones)
+        {
+            phones.Add(Phone.Create(phone.NationalId, phone.Value, phone.IsActive));
+        }
+
+        var client = Client.Create(address,
+                                   taxCondition,
+                                   request.ClientName,
+                                   request.Cuil,
+                                   request.HasEmailNotification,
+                                   emails,
+                                   request.HasPhoneNotification,
+                                   phones,
+                                   request.Observation,
+                                   request.HasCheckingAccount,
+                                   request.IsWholesaler);
 
         _clientRepository.Add(client);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var taxConditionResult = new TaxConditionResult(taxCondition.Id.Value.ToString(), taxCondition.Description, taxCondition.Type, taxCondition.VAT);
-
-        return new ClientResult(client.Id.Value.ToString(), client.Address, taxConditionResult, client.ClientName, client.Cuil, client.Email, client.PhoneNumber, client.CellphoneNumber, client.Observation, client.HasCheckingAccount, client.IsWholesaler);
+        var emailsResult = new List<EmailResult>();
+        foreach(var email in client.Emails)
+        {
+            emailsResult.Add(new(email.Id.Value.ToString(), email.Value, email.IsActive));
+        }
+        var phonesResult = new List<PhoneResult>();
+        foreach (var phone in client.Phones)
+        {
+            phonesResult.Add(new(phone.Id.Value.ToString(), phone.NationalId, phone.Value, phone.IsActive));
+        }
+        return new ClientResult(client.Id.Value.ToString(), client.Address, taxConditionResult, client.ClientName, client.Cuil,client.HasEmailNotification, emailsResult, client.HasPhoneNotification, phonesResult, client.Observation, client.HasCheckingAccount, client.IsWholesaler);
     }
 }

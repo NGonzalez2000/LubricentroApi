@@ -1,0 +1,22 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/Provider/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJQcm92aWRlclBvbGljeSIsIkNsaWVudFBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiTWlncmF0aW9uUG9saWN5Il0sImV4cCI6MTcxOTQ5MzQ3NiwiaXNzIjoiTHVicmljZW50cm8iLCJhdWQiOiJMdWJyaWNlbnRybyJ9.-TNiUEmFGZm9pW5Cu6HgeRIX6eV7Q6oGTY0SJAKt204
+
+{
+    "Id": "30b1f1da-00b0-4a94-9172-7b5bc5f4b808",
+    "Name": "Proveedor2",
+    "Cuil":"30000000007",
+    "Phone":"3404643216",
+    "Email":"test1@hotmail.com",
+    "Fax":"FAX2",
+    "Observation":"Observacion escrita en vs code",
+    "Website":"www.google.com",
+    "Country":"Argentina",
+    "State":"Buenos Aires",
+    "City":"Palermo",
+    "Street":"Ayacucho 220",
+    "PostalCode":"2252",
+    "TaxConditionId":"cd220f55-5450-42cf-9f45-b31899682b2e"
+  }

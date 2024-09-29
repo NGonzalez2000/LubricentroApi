@@ -33,17 +33,6 @@ internal class ClientConfigurations : IEntityTypeConfiguration<Client>
         builder.Property(x => x.Cuil)
             .HasMaxLength(11);
 
-        builder.Property(x => x.PhoneNumber)
-            .HasMaxLength(20);
-
-        builder.Property(x => x.CellphoneNumber)
-            .HasMaxLength(20);
-
-        builder.Property(x => x.Email)
-            .HasMaxLength(200);
-
-        builder.Property(x => x.Email);
-
         builder.Property(x => x.HasCheckingAccount);
 
         builder.Property(x => x.IsWholesaler);

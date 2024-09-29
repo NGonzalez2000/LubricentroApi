@@ -9,7 +9,7 @@ internal class ClientRepository(LubricentroDbContext dbContext) : Repository<Cli
 {
     public Task<List<Client>> GetAllAsync()
     {
-        return DbContext.Clients.Include(c => c.Address).Include(c => c.TaxCondition).ToListAsync();
+        return DbContext.Clients.Include(c => c.Address).Include(c => c.TaxCondition).Include(c => c.Emails).Include(c => c.Phones).ToListAsync();
     }
 
 
@@ -20,6 +20,6 @@ internal class ClientRepository(LubricentroDbContext dbContext) : Repository<Cli
 
     public Client? GetClientById(ClientId Id)
     {
-        return DbContext.Clients.Include(c => c.Address).FirstOrDefault(c => c.Id == Id);
+        return DbContext.Clients.Include(c => c.Address).Include(c => c.Emails).Include(c => c.Phones).FirstOrDefault(c => c.Id == Id);
     }
 }

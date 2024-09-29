@@ -1,0 +1,21 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/Provider/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJQcm92aWRlclBvbGljeSIsIkNsaWVudFBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQnJhbmRQb2xpY3kiLCJNaWdyYXRpb25Qb2xpY3kiXSwiZXhwIjoxNzI2MTQ4MDAwLCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.pz9jr6L2DVN3xpawYfJScc_rkuYDDeU8N4KGAuoSphw
+
+{
+    "Name": "Proveedor-1",
+    "Cuil":"30000000007",
+    "Phones":[{"Id":"00000000-0000-0000-0000-000000000000","NationalId":"54", "value":"3404643216", "isActive":true}],
+    "Emails":[{"Id":"00000000-0000-0000-0000-000000000000","value":"nicu_a_gonzalez@hotmail.com", "isActive":false}],
+    "Fax":"FAX1",
+    "Observation":"Observacion escrita en vs code",
+    "Website":"www.google.com",
+    "Country":"Argentina",
+    "State":"Santa Fe",
+    "City":"Galvez",
+    "Street":"Ayacucho 220",
+    "PostalCode":"2252",
+    "TaxConditionId":"a8fe9d07-fee0-44b5-8698-037b0669d107"
+  }

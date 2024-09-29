@@ -1,4 +1,7 @@
-﻿namespace Lubricentro.Contracts.Clients;
+﻿using Lubricentro.Contracts.Emails;
+using Lubricentro.Contracts.Phones;
+
+namespace Lubricentro.Contracts.Clients;
 
 public record UpdateClientRequest(Guid Id,
                                   string Country,
@@ -9,9 +12,10 @@ public record UpdateClientRequest(Guid Id,
                                   Guid TaxConditionId,
                                   string ClientName,
                                   string Cuil,
-                                  string Email,
-                                  string PhoneNumber,
-                                  string CellphoneNumber,
+                                  bool HasEmailNotification,
+                                  List<EmailRequest> Emails,
+                                  bool HasPhoneNotification,
+                                  List<PhoneRequest> Phones,
                                   string Observation,
                                   bool HasCheckingAccount,
                                   bool IsWholesaler)

@@ -1,0 +1,18 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/product/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJQcm92aWRlclBvbGljeSIsIkNsaWVudFBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQnJhbmRQb2xpY3kiLCJNaWdyYXRpb25Qb2xpY3kiXSwiZXhwIjoxNzI2MTQ4MDAwLCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.pz9jr6L2DVN3xpawYfJScc_rkuYDDeU8N4KGAuoSphw
+
+{
+    "Code":"1",
+    "Barcode":"1",
+    "Description":"1",
+    "providerid":"40ccc861-e57b-44c5-b26c-d9c6ccab3501",
+    "brandid":"ac68369a-6bfc-4289-a733-1ac0e79d5dc1",
+    "ListPrice":0.00,
+    "SellPrice":0.00,
+    "MarkupPercentage":0.00,
+    "IsWholesaler": false,
+    "IsUsd": false
+}

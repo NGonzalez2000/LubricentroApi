@@ -19,7 +19,8 @@ public class UpdateCompanyCommandHandler(ICompanyRepository companyRepository, I
             return Errors.Companies.NotFound;
         }
 
-        if(await _companyRepository.GetByNameAsync(request.Name) is not null)
+        if((await _companyRepository.GetByNameAsync(request.Name) is Company existingComp)
+            && (existingComp.Id.Value != request.Id))
         {
             return Errors.Companies.Duplicated;
         }

@@ -1,0 +1,16 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/Branch/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJQcm92aWRlclBvbGljeSIsIkNsaWVudFBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQnJhbmRQb2xpY3kiLCJNaWdyYXRpb25Qb2xpY3kiXSwiZXhwIjoxNzI1NDM1NDkxLCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.NUI_W6u6kR98SbtY2zP370yZ3_54YzNnNocJ_wPYkjc
+
+{
+    "id":"d5e05a24-868e-4007-84e4-1580250a4fef",
+    "name":"sucursal 1",
+    "pointofsale":"12",
+    "country":"Argentina",
+    "state":"Santa Fe",
+    "city":"Galvez",
+    "street":"Sarmiento 1000",
+    "postalcode":"2252"
+}

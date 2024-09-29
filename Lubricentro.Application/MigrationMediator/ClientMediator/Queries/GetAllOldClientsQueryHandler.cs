@@ -2,7 +2,9 @@
 using Lubricentro.Application.Common.Interfaces.Persistence.LubricentroDb;
 using Lubricentro.Application.Common.Interfaces.Persistence.MigrationDb;
 using Lubricentro.Application.Common.Interfaces.Persistence.OldDb;
+using Lubricentro.Application.EmailMediator;
 using Lubricentro.Application.MigrationMediator.ClientMediator.Common;
+using Lubricentro.Application.PhoneMediator;
 using MediatR;
 
 namespace Lubricentro.Application.MigrationMediator.ClientMediator.Queries;
@@ -40,6 +42,18 @@ internal class GetAllOldClientsQueryHandler(IClientMigrationRepository _clientMi
             }
 
 
+            List<EmailResult> emails = [];
+            List<PhoneResult> phones = [];
+
+            string temp = oldClient.Cli_Email.Trim();
+            if (!string.IsNullOrEmpty(temp)) emails.Add(new(Guid.Empty.ToString(), temp, true));
+
+            temp = oldClient.Cli_Telefono.Trim();
+            if (!string.IsNullOrEmpty(temp)) phones.Add(new(Guid.Empty.ToString(),"54", temp, true));
+            temp = oldClient.Cli_Celular.Trim();
+            if (!string.IsNullOrEmpty(temp)) phones.Add(new(Guid.Empty.ToString(),"54", temp, true));
+            
+
             OldClientResult result = new(id,
                                          "",
                                          "",
@@ -53,9 +67,10 @@ internal class GetAllOldClientsQueryHandler(IClientMigrationRepository _clientMi
                                          taxCondition.VAT,
                                          oldClient.Cli_Nombre.Trim(),
                                          oldClient.Cli_Cuit.Trim(),
-                                         oldClient.Cli_Email.Trim(),
-                                         oldClient.Cli_Telefono.Trim(),
-                                         oldClient.Cli_Celular.Trim(),
+                                         true,
+                                         emails,
+                                         true,
+                                         phones,
                                          "",
                                          oldClient.Cli_Cta_Cte,
                                          oldClient.Cli_Mayorista == 1);

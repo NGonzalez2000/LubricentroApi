@@ -74,17 +74,43 @@ public static class DependencyInjection
         // BASE SERVER
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LubricentroDbContext>());
         services.AddScoped<PublishDomainEventInterceptor>();
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-        services.AddScoped<IPolicyRepository, PolicyRepository>();
-        services.AddScoped<IRoleRepository, RoleRepository>();
-        services.AddScoped<ICompanyRepository, CompanyRepository>();
-        services.AddScoped<ICompanyServiceRepository, CompanyServiceRepository>();
-        services.AddScoped<IChatRepository, ChatRepository>();
-        services.AddScoped<IClientRepository, ClientRepository>();
-        services.AddScoped<IAddressRepository, AddressRepository>();
-        services.AddScoped<ITaxConditionRepository, TaxConditionRepository>();
 
+        //services.AddScoped<IAddressRepository, AddressRepository>();
+        //services.AddScoped<IBranchRepository, BranchRepository>();
+        //services.AddScoped<IBrandRepository, BrandRepository>();
+        //services.AddScoped<IChatRepository, ChatRepository>();
+        //services.AddScoped<IClientRepository, ClientRepository>();
+        //services.AddScoped<ICompanyRepository, CompanyRepository>();
+        //services.AddScoped<ICompanyServiceRepository, CompanyServiceRepository>();
+        //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        //services.AddScoped<IUserRepository, UserRepository>();
+        //services.AddScoped<IPolicyRepository, PolicyRepository>();
+        //services.AddScoped<IProductRepository, ProductRepository>();
+        //services.AddScoped<IProviderRepository, ProviderRepository>();
+        //services.AddScoped<IRoleRepository, RoleRepository>();
+        //services.AddScoped<ITaxConditionRepository, TaxConditionRepository>();
+
+        // Get the assembly where the repository interfaces are located
+        var applicationAssembly = typeof(IAddressRepository).Assembly;
+        // Get the assembly where the repository implementations are located
+        var infrastructureAssembly = typeof(AddressRepository).Assembly;
+
+        // Find all interfaces and implementations that match the pattern
+        var interfaceTypes = applicationAssembly.GetTypes()
+            .Where(t => t.IsInterface && t.Name.EndsWith("Repository"));
+
+        foreach (var interfaceType in interfaceTypes)
+        {
+            // Find the corresponding implementation in the infrastructure assembly
+            var implementationType = infrastructureAssembly.GetTypes()
+                .FirstOrDefault(t => t.Name == interfaceType.Name[1..] && !t.IsInterface && !t.IsAbstract);
+
+            if (implementationType != null)
+            {
+                // Register the interface and implementation as scoped
+                services.AddScoped(interfaceType, implementationType);
+            }
+        }
         return services;
     }
 

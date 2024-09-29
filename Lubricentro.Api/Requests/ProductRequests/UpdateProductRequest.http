@@ -1,0 +1,19 @@
+@Api_HostAddress = http://localhost:5198
+
+POST {{Api_HostAddress}}/product/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6Ik5pY29sYXMgR29uemFsZXoiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhkNzdmYjc2LTVlYTEtNGNiNi1hZmQzLWMwNDQyY2I4MTFhYiIsImVtYWlsIjoibmljbzFfYV9nb256YWxlekBob3RtYWlsLmNvbSIsIlBvbGljeSI6WyJTZXJ2ZXJQb2xpY3kiLCJQcm92aWRlclBvbGljeSIsIkNsaWVudFBvbGljeSIsIkNvbXBhbnlQb2xpY3kiLCJDaGF0UG9saWN5IiwiRW1wbG95ZWVNb2RpZmljYXRpb25zUG9saWN5IiwiQnJhbmRQb2xpY3kiLCJNaWdyYXRpb25Qb2xpY3kiXSwiZXhwIjoxNzI2MTQ4MDAwLCJpc3MiOiJMdWJyaWNlbnRybyIsImF1ZCI6Ikx1YnJpY2VudHJvIn0.pz9jr6L2DVN3xpawYfJScc_rkuYDDeU8N4KGAuoSphw
+
+{
+    "Id":"6e411f52-ddc6-471f-8bfd-a6db12bfa9e7",
+    "Code":"Code",
+    "Barcode":"L25000000001",
+    "Description":"FIRST PRODUCT",
+    "providerid":"9e96e7a8-a9cd-444a-86ff-f676f4c217f5",
+    "brandid":"ac68369a-6bfc-4289-a733-1ac0e79d5dc1",
+    "ListPrice":100000.00,
+    "SellPrice":150000.00,
+    "MarkupPercentage":20.00,
+    "IsWholesaler": true,
+    "IsUsd": false
+}

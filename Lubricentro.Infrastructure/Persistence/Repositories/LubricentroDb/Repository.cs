@@ -3,15 +3,12 @@ using Lubricentro.Domain.Common.Models;
 
 namespace Lubricentro.Infrastructure.Persistence.Repositories.LubricentroDb;
 
-public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId>
+public abstract class Repository<TEntity, TId>(LubricentroDbContext dbContext) : IRepository<TEntity, TId>
     where TEntity : Entity<TId>
     where TId : AggregateRootId<Guid>
 {
-    protected readonly LubricentroDbContext DbContext;
-    protected Repository(LubricentroDbContext dbContext)
-    {
-        DbContext = dbContext;
-    }
+    protected readonly LubricentroDbContext DbContext = dbContext;
+
     public void Add(TEntity entity)
     {
         DbContext.Set<TEntity>().Add(entity);

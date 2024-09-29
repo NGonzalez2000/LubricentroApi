@@ -45,7 +45,7 @@ internal class MigrationHelper
 
         migrationBuilder.Sql(query);
     }
-    internal static void PolicyRemover(MigrationBuilder migrationBuilder, string name)
+    internal static void RemovePolicy(MigrationBuilder migrationBuilder, string name)
     {
         string query = $"Delete from Policies where [Name] = '{name}'";
         migrationBuilder.Sql(query);

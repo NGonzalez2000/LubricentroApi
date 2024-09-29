@@ -8,6 +8,7 @@ using Lubricentro.Contracts.Companies;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lubricentro.Api.Controllers;

@@ -1,4 +1,7 @@
-﻿namespace Lubricentro.Contracts.Clients;
+﻿using Lubricentro.Contracts.Emails;
+using Lubricentro.Contracts.Phones;
+
+namespace Lubricentro.Contracts.Clients;
 
 public record CreateClientRequest(string Country,
                                   string State,
@@ -8,9 +11,10 @@ public record CreateClientRequest(string Country,
                                   string ClientName,
                                   Guid TaxConditionId,
                                   string Cuil,
-                                  string Email,
-                                  string PhoneNumber,
-                                  string CellphoneNumber,
+                                  bool HasEmailNotification,
+                                  List<EmailRequest> Emails,
+                                  bool HasPhoneNotification,
+                                  List<PhoneRequest> Phones,
                                   string Observation,
                                   bool HasCheckingAccount,
                                   bool IsWholesaler)
